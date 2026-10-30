@@ -1,201 +1,944 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ATHLONIX | Sports Performance Lab</title>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Orbitron:wght@500;700;800;900&display=swap');
+:root{--bg:#05070c;--panel:#0c1422;--line:#24364c;--cyan:#37e6ff;--violet:#a66bff;--red:#ff365e;--white:#f4f7ff;--muted:#94a7bf;--green:#69ffb4}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--white);font-family:Inter,Arial,sans-serif;background-image:radial-gradient(ellipse at 10% 0%,#37e6ff17,transparent 38%),radial-gradient(ellipse at 90% 15%,#a66bff18,transparent 34%),linear-gradient(#37e6ff08 1px,transparent 1px),linear-gradient(90deg,#37e6ff08 1px,transparent 1px);background-size:auto,auto,38px 38px,38px 38px}
+button,input,select,textarea{font:inherit}button,a{cursor:pointer}a{color:inherit;text-decoration:none}
+header{height:72px;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:#05070ceF;border-bottom:1px solid #37e6ff44;backdrop-filter:blur(14px)}
+.brand{font:900 20px Orbitron,sans-serif;letter-spacing:2px;display:flex;align-items:center;gap:12px}.brand b{color:var(--cyan)}.logo{border:2px solid var(--cyan);color:var(--cyan);width:36px;height:36px;display:grid;place-items:center;box-shadow:0 0 20px #37e6ff40;clip-path:polygon(15% 0,100% 0,100% 80%,80% 100%,0 100%,0 15%)}
+.status{font:700 10px Orbitron,sans-serif;color:var(--green);letter-spacing:1px;border:1px solid #69ffb455;padding:10px}.menu{display:none;background:#111c2c;color:white;border:1px solid var(--line);font-size:20px;padding:8px 12px}
+.shell{display:flex;min-height:calc(100vh - 72px)}aside{width:235px;flex-shrink:0;background:#070b13eF;border-right:1px solid var(--line);padding:22px 13px;position:sticky;top:72px;height:calc(100vh - 72px)}
+.navtitle{font:700 9px Orbitron,sans-serif;letter-spacing:2px;color:#71849f;padding:15px 12px 8px}.nav{display:block;color:#aabbd0;padding:13px 12px;border:1px solid transparent;border-radius:4px;font-size:12px;font-weight:700;margin:4px 0}.nav:hover,.nav.active{color:white;border-color:#37e6ff50;background:linear-gradient(90deg,#37e6ff17,transparent);box-shadow:inset 3px 0 var(--cyan)}
+.asidebox{border:1px solid var(--line);background:linear-gradient(140deg,#111e30,#090d16);padding:14px;margin-top:30px;border-radius:5px;font-size:11px;color:var(--muted);line-height:1.7}
+main{max-width:1500px;width:100%;padding:30px clamp(16px,4vw,52px) 60px;margin:auto;min-width:0}.eyebrow{font:700 10px Orbitron,sans-serif;color:var(--cyan);letter-spacing:2px;text-transform:uppercase}.eyebrow:before{content:"";display:inline-block;width:22px;height:2px;background:var(--cyan);vertical-align:middle;margin-right:8px;box-shadow:0 0 10px var(--cyan)}
+.hero{min-height:370px;padding:clamp(24px,5vw,58px);border:1px solid #2c4963;border-radius:8px;position:relative;overflow:hidden;background:linear-gradient(90deg,#050911 0%,#07101beF 52%,#080e1a77 100%),url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1600&q=85') center/cover}
+.hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(135deg,transparent 0 35px,#37e6ff09 36px 37px)}.hero-inner{position:relative;z-index:1;max-width:700px}.hero h1{font:900 clamp(38px,5.5vw,72px)/1.05 Orbitron,sans-serif;letter-spacing:-2px;margin:20px 0}.glow{color:var(--cyan);text-shadow:0 0 25px #37e6ff66}.hero p{color:#b5c5d9;font-size:14px;line-height:1.8;max-width:570px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.btn{border:1px solid var(--cyan);background:var(--cyan);color:#031019;padding:12px 16px;font-weight:900;font-size:10px;letter-spacing:1px;text-transform:uppercase;border-radius:3px}.btn:hover{box-shadow:0 0 22px #37e6ff66;transform:translateY(-1px)}.btn.alt{background:transparent;color:white;border-color:#40536c}.btn.purple{background:var(--violet);border-color:var(--violet);color:white}
+section{margin-top:35px;scroll-margin-top:90px}.head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:16px}.head h2{font:800 clamp(20px,2.5vw,27px) Orbitron,sans-serif;margin-top:9px}.head p{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.6}.tag{font:700 9px Orbitron,sans-serif;color:var(--cyan);border:1px solid #37e6ff44;padding:8px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}.card{position:relative;min-width:0;padding:19px;background:linear-gradient(145deg,#101a2aF2,#080d16F8);border:1px solid var(--line);border-radius:6px;overflow:hidden}.card:before{content:"";position:absolute;left:0;top:0;width:62px;height:2px;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}.card h3{font-size:14px;margin-bottom:9px}.card p{font-size:12px;color:var(--muted);line-height:1.7}.stat{grid-column:span 3;min-height:125px}.stat small{color:var(--muted);font-size:9px;letter-spacing:1.5px}.stat strong{display:block;font:800 28px Orbitron,sans-serif;margin:15px 0 8px}.stat em{font-style:normal;color:var(--cyan);font-size:11px}.good{font-size:10px;color:var(--green)}
+.sport{grid-column:span 4;padding:0}.photo{height:150px;background-position:center;background-size:cover;position:relative}.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0b111c,transparent 85%),linear-gradient(90deg,#37e6ff18,transparent)}.sportbody{padding:17px}.sporthead{display:flex;justify-content:space-between;gap:8px}.sporthead h3{font:700 14px Orbitron,sans-serif}.sporthead span{font:700 9px Orbitron,sans-serif;color:var(--cyan)}.smallbtn{padding:9px 11px;background:#111d2c;color:#dce9f8;border:1px solid #2b4059;border-radius:3px;font-size:9px;font-weight:800;margin-top:13px}.smallbtn:hover{color:var(--cyan);border-color:var(--cyan)}
+.half{grid-column:span 6}.full{grid-column:span 12}.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.field{display:flex;flex-direction:column;gap:7px}.field label{font-size:9px;color:#9eb0c8;letter-spacing:1px;text-transform:uppercase}.field input,.field select,.field textarea{width:100%;padding:11px;background:#050a12;color:white;border:1px solid #293d55;border-radius:3px;outline:none}.field textarea{min-height:90px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan)}.out{white-space:pre-wrap;margin-top:13px;padding:13px;background:#060d17;border:1px dashed #2c526a;color:#c8d9ed;border-radius:4px;font-size:11px;line-height:1.8}.out b{color:var(--cyan)}.hint{font-size:10px!important;margin-top:10px}.video{width:100%;max-height:300px;background:#020409;margin-top:12px;border:1px solid var(--line)}.checks{display:grid;gap:8px;margin-top:13px}.checks label{padding:10px;background:#0a111e;border:1px solid #1d2b42;font-size:11px;color:#c8d7e8}.checks input{accent-color:var(--cyan);margin-right:7px}.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.rule{padding:12px;background:#0a111e;border:1px solid #1d2b42;border-radius:4px}.rule b{display:block;color:var(--cyan);font-size:11px;margin-bottom:5px}.rule span{font-size:10px;line-height:1.6;color:var(--muted)}.timeline{display:grid;gap:8px;margin-top:14px}.day{display:grid;grid-template-columns:82px 1fr;gap:12px;padding:12px;background:#0a111e;border:1px solid #1d2b42}.day b{font:700 10px Orbitron,sans-serif;color:var(--cyan)}.day span{font-size:11px;color:#c3d1e2;line-height:1.6}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#718198;font-size:9px;letter-spacing:1px}footer b{font-family:Orbitron,sans-serif;color:var(--cyan)}#toast{display:none;position:fixed;right:16px;bottom:16px;background:#111d2c;border:1px solid var(--cyan);padding:12px 15px;font-size:11px;z-index:50}
+@media(max-width:1000px){.menu{display:block}aside{position:fixed;z-index:20;top:72px;left:0;transform:translateX(-105%);transition:.2s;box-shadow:20px 0 40px #0008}aside.open{transform:translateX(0)}.stat{grid-column:span 6}.sport{grid-column:span 6}.half{grid-column:span 12}}
+@media(max-width:620px){header{padding:0 14px;height:66px}.brand{font-size:15px}.status{display:none}aside{top:66px;height:calc(100vh - 66px)}main{padding:18px 12px 45px}.hero{min-height:420px;padding:23px 18px}.hero h1{letter-spacing:-1px}.stat,.sport,.half,.full{grid-column:span 12}.form,.rules{grid-template-columns:1fr}.head{align-items:start;flex-direction:column}.tag{display:none}}
+ .analysisbar{height:6px;background:#172337;border:1px solid #2a4058;margin-top:10px;overflow:hidden;border-radius:4px}.analysisbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet));transition:width .2s}.metric{display:inline-block;border:1px solid #28445d;padding:7px 9px;margin:5px 5px 0 0;color:var(--cyan);font:700 10px Orbitron,sans-serif}
 
-:root {
-  --bg: #05070c;
-  --panel: #0c1422;
-  --line: #24364c;
-  --cyan: #37e6ff;
-  --violet: #a66bff;
-  --red: #ff365e;
-  --white: #f4f7ff;
-  --muted: #94a7bf;
-  --green: #69ffb4;
+/* ATHLONIX 4.0 — midnight pitch theme: graphite, electric lime and matchday orange */
+:root{--bg:#080d12;--panel:#111a20;--line:#293941;--cyan:#b6ff3b;--violet:#ff8b38;--red:#ff5a52;--white:#f1f7f3;--muted:#a0b2ac;--green:#b6ff3b}
+body{background:var(--bg);color:var(--white);background-image:radial-gradient(ellipse at 8% 0%,#b6ff3b13,transparent 38%),radial-gradient(ellipse at 92% 14%,#ff8b3818,transparent 35%),linear-gradient(#b6ff3b07 1px,transparent 1px),linear-gradient(90deg,#b6ff3b07 1px,transparent 1px);background-size:auto,auto,36px 36px,36px 36px}
+header{background:#080f13f2;border-bottom:1px solid #b6ff3b55}.brand{color:#f7fff9}.brand b{color:var(--cyan)}.logo{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 20px #b6ff3b22}.status{color:var(--cyan);border-color:#b6ff3b55}.menu{background:#16232a;color:#fff;border-color:var(--line)}
+aside{background:#0b1318f5;border-right:1px solid var(--line)}.navtitle{color:#758b84}.nav{color:#c0d0ca}.nav:hover,.nav.active{color:#f7fff9;border-color:#b6ff3b55;background:linear-gradient(90deg,#b6ff3b16,transparent);box-shadow:inset 3px 0 var(--cyan)}.asidebox{background:linear-gradient(140deg,#17272c,#0d151a);border-color:#2b4145;color:var(--muted)}
+.eyebrow{color:var(--cyan)}.eyebrow:before{background:var(--violet);box-shadow:0 0 10px #ff8b3855}.hero{border-color:#354b50;background:linear-gradient(90deg,#080f13f5 0%,#0a1719e8 53%,#0b141877 100%),url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1600&q=85') center/cover}.glow{color:var(--cyan);text-shadow:0 0 25px #b6ff3b44}.hero p{color:#d2e0da}.btn{border-color:var(--cyan);background:var(--cyan);color:#10170c}.btn:hover{box-shadow:0 0 20px #b6ff3b35}.btn.alt{background:transparent;color:#f1f7f3;border-color:#52656b}.btn.purple{background:var(--violet);border-color:var(--violet);color:#1c1209}.tag{color:var(--cyan);border-color:#b6ff3b44}
+.card{background:linear-gradient(145deg,#142027f5,#0d151af8);border-color:#293941;box-shadow:0 7px 24px #0002}.card:before{background:var(--violet);box-shadow:0 0 12px #ff8b3830}.stat small{color:#9fb1ab}.stat strong{color:#f1f7f3}.stat em{color:var(--cyan)}.good{color:#b6ff3b}.sporthead span{color:var(--cyan)}.photo:after{background:linear-gradient(0deg,#0d171d,transparent 85%),linear-gradient(90deg,#b6ff3b12,transparent)}.smallbtn{background:#17252b;color:#e4eee8;border-color:#34494f}.smallbtn:hover{color:var(--cyan);border-color:var(--cyan)}
+.field label{color:#a8bbb3}.field input,.field select,.field textarea{background:#0a1217;color:#f1f7f3;border-color:#34464d}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 2px #b6ff3b14}.out{background:#0a1217;border-color:#344b4c;color:#d0ded8}.out b{color:var(--cyan)}.checks label,.rule,.day{background:#101b20;border-color:#293d42;color:#d0ded8}.checks label{color:#d0ded8}.checks input{accent-color:var(--cyan)}.rule b{color:var(--cyan)}.rule span{color:#a0b2ac}.day b{color:var(--cyan)}.day span{color:#d0ded8}.day span strong{color:var(--cyan)!important}.analysisbar{background:#1b2a30;border-color:#34464d}.analysisbar span{background:linear-gradient(90deg,var(--cyan),var(--violet))}.metric{border-color:#344b4c;color:var(--cyan)}footer{border-color:#293941;color:#82958e}footer b{color:var(--cyan)}#toast{background:#111e24;border-color:var(--cyan);color:#f1f7f3;box-shadow:0 8px 25px #0005}
+.history-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}.history-actions .btn{font-size:9px;padding:10px 12px}.history-actions .btn.alt{color:#dce8e2;border-color:#42565b}
+@media(max-width:1000px){aside{box-shadow:20px 0 40px #0008}}
+
+/* Video Coach Chat */
+.chatcard{grid-column:span 12;border-color:#b6ff3b66;background:linear-gradient(145deg,#111c20,#0b1216)}.chatwindow{height:270px;overflow:auto;padding:14px;background:#070d10;border:1px solid #293941;border-radius:5px;display:flex;flex-direction:column;gap:10px;margin-top:14px}.chatmsg{max-width:92%;padding:11px 13px;border-radius:8px;font-size:12px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}.chatmsg.bot{align-self:flex-start;background:#17251e;border:1px solid #45613c;color:#edf7ed}.chatmsg.user{align-self:flex-end;background:#b6ff3b;color:#10170b;font-weight:600}.chatrow{display:grid;grid-template-columns:1fr auto;gap:9px;margin-top:11px}.chatrow input{min-width:0;width:100%;padding:13px;background:#070d10;color:#f1f7f3;border:1px solid #344b4c;border-radius:4px}.chatquick{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.chatquick button{border:1px solid #52644b;background:#17221b;color:#dff5d6;padding:8px 10px;border-radius:20px;font-size:10px}.chatstatus{font-size:10px;color:#a0b2ac;margin-top:8px}
+@media(max-width:620px){.chatrow{grid-template-columns:1fr}.chatrow .btn{width:100%}.chatmsg{max-width:98%}}
+
+
+/* Sport-matched dynamic theme selector */
+.theme-picker{display:flex;align-items:center;gap:8px;font:700 9px Orbitron,sans-serif;letter-spacing:.7px;color:var(--muted);white-space:nowrap}
+.theme-picker select{max-width:155px;padding:9px 10px;background:#101b20;color:var(--white);border:1px solid var(--cyan);border-radius:4px;font:700 10px Inter,Arial,sans-serif;outline:none}
+:root{--glow-a:#b6ff3b18;--glow-b:#ff8b3820}
+body{background-image:radial-gradient(ellipse at 8% 0%,var(--glow-a),transparent 38%),radial-gradient(ellipse at 92% 14%,var(--glow-b),transparent 35%),linear-gradient(color-mix(in srgb,var(--cyan) 5%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--cyan) 5%,transparent) 1px,transparent 1px)}
+header{border-bottom-color:color-mix(in srgb,var(--cyan) 40%,transparent)}
+.brand b,.logo,.status,.eyebrow,.tag,.sporthead span,.metric,.rule b,.day b,footer b{color:var(--cyan)}
+.logo{border-color:var(--cyan);box-shadow:0 0 20px color-mix(in srgb,var(--cyan) 25%,transparent)}
+.status{border-color:color-mix(in srgb,var(--cyan) 40%,transparent)}
+.nav:hover,.nav.active{border-color:color-mix(in srgb,var(--cyan) 45%,transparent);background:linear-gradient(90deg,color-mix(in srgb,var(--cyan) 10%,transparent),transparent);box-shadow:inset 3px 0 var(--cyan)}
+.eyebrow:before,.card:before{background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.glow{color:var(--cyan);text-shadow:0 0 25px color-mix(in srgb,var(--cyan) 40%,transparent)}
+.btn{background:var(--cyan);border-color:var(--cyan);color:#08110b}.btn:hover{box-shadow:0 0 22px color-mix(in srgb,var(--cyan) 35%,transparent)}
+.btn.purple{background:var(--violet);border-color:var(--violet);color:#fff}
+.smallbtn:hover{color:var(--cyan);border-color:var(--cyan)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 2px color-mix(in srgb,var(--cyan) 10%,transparent)}
+.out b{color:var(--cyan)}.checks input{accent-color:var(--cyan)}.analysisbar span{background:linear-gradient(90deg,var(--cyan),var(--violet))}
+.chatcard{border-color:color-mix(in srgb,var(--cyan) 40%,transparent)}.chatmsg.user{background:var(--cyan);color:#08110b}
+#toast{border-color:var(--cyan)}
+@media(max-width:620px){.theme-picker span{display:none}.theme-picker select{max-width:125px;padding:8px 7px}header>div:first-child{gap:7px}}
+
+
+/* Unified themed controls: custom dropdowns prevent the bright native Android picker */
+:root{color-scheme:dark}
+select,input,textarea{color-scheme:dark}
+select option{background:#0b1519;color:#f3f8f6}
+.custom-select{position:relative;width:100%;min-width:0;font-family:Inter,Arial,sans-serif}
+.custom-select-native{position:absolute!important;inset:auto!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;clip-path:inset(50%)!important}
+.custom-select-trigger{width:100%;min-height:46px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;padding:12px 14px;background:linear-gradient(145deg,#101d22,#0a1216);color:var(--white,#f4f8f7);border:1px solid color-mix(in srgb,var(--cyan,#8c70bd) 55%,#26373b);border-radius:7px;font:500 15px Inter,Arial,sans-serif;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff08;transition:border-color .18s,box-shadow .18s,background .18s}
+.custom-select-trigger:after{content:'⌄';font-size:20px;line-height:1;color:var(--cyan,#9c7bd0);flex-shrink:0}
+.custom-select-trigger:hover,.custom-select.open .custom-select-trigger,.custom-select-trigger:focus-visible{border-color:var(--cyan,#9c7bd0);box-shadow:0 0 0 2px color-mix(in srgb,var(--cyan,#9c7bd0) 18%,transparent);outline:none}
+.custom-select-menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 7px);max-height:min(290px,45vh);overflow:auto;z-index:9999;padding:6px;background:#081115;border:1px solid var(--cyan,#8c70bd);border-radius:9px;box-shadow:0 16px 40px #000b,0 0 18px color-mix(in srgb,var(--cyan,#9c70bd) 14%,transparent)}
+.custom-select.open .custom-select-menu{display:block}
+.custom-select-option{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;padding:12px 12px;border:1px solid transparent;border-radius:6px;background:transparent;color:#dbe7e5;font:500 14px/1.35 Inter,Arial,sans-serif;cursor:pointer;white-space:normal}
+.custom-select-option:hover,.custom-select-option:focus-visible{background:color-mix(in srgb,var(--cyan,#8c70bd) 14%,#0b1519);border-color:color-mix(in srgb,var(--cyan,#8c70bd) 35%,transparent);outline:none}
+.custom-select-option[aria-selected="true"]{background:linear-gradient(100deg,color-mix(in srgb,var(--cyan,#8c70bd) 19%,#0b1519),color-mix(in srgb,var(--violet,#9c7bd0) 12%,#0b1519));color:#fff;border-color:color-mix(in srgb,var(--cyan,#8c70bd) 42%,transparent)}
+.custom-select-option[aria-selected="true"]:after{content:'✓';font-weight:800;color:var(--green,#b6ff4d)}
+.theme-picker .custom-select{width:auto;min-width:142px}
+.theme-picker .custom-select-trigger{min-height:39px;padding:8px 10px;font-size:12px;font-weight:700;border-color:color-mix(in srgb,var(--violet,#9c7bd0) 70%,#26373b)}
+.theme-picker .custom-select-menu{min-width:165px;right:0;left:auto}
+@media(max-width:620px){.theme-picker .custom-select{min-width:0;width:auto;max-width:145px}.theme-picker .custom-select-trigger{max-width:145px;padding:8px 7px;font-size:11px}.custom-select-trigger{min-height:44px}}
+@media(prefers-reduced-motion:no-preference){.custom-select-menu{animation:selectPop .12s ease-out}@keyframes selectPop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}}
+
+</style>
+
+<style id="athlonix-brand-mobile-upgrade">
+/* Unified brand system */
+header{gap:16px;padding-inline:clamp(14px,3.4vw,48px);}
+.brand{gap:11px;min-width:0;flex-shrink:0;letter-spacing:0;}
+.logo{width:42px;height:42px;flex:0 0 42px;font:900 21px Orbitron,sans-serif;border-radius:9px;clip-path:polygon(14% 0,100% 0,100% 82%,82% 100%,0 100%,0 14%);background:linear-gradient(145deg,color-mix(in srgb,var(--cyan) 14%,transparent),transparent);}
+.brand-copy{display:flex;flex-direction:column;gap:3px;min-width:0;}
+.brand-name{font:900 20px/1 Orbitron,sans-serif;letter-spacing:1.8px;white-space:nowrap;color:var(--white);}
+.brand-name b{color:var(--cyan);}
+.brand-tagline{font:700 8px/1.3 Inter,Arial,sans-serif;letter-spacing:1.15px;color:var(--muted);white-space:nowrap;}
+.header-tools{display:flex;align-items:center;justify-content:flex-end;gap:10px;min-width:0;}
+.status{white-space:nowrap;}
+.hero{border-radius:12px;}
+.card{border-radius:10px;}
+.btn,.smallbtn,.menu,.theme-picker .custom-select-trigger{touch-action:manipulation;}
+img,video,canvas,svg{max-width:100%;}
+.grid>*{min-width:0;}
+.card p,.head p,.hero p,.asidebox{overflow-wrap:anywhere;}
+@media(max-width:1000px){header{padding-inline:18px}.status{display:none}.header-tools{gap:9px}}
+@media(max-width:620px){
+ header{height:66px;padding-inline:12px;gap:8px}
+ .brand{gap:8px;max-width:52%;}
+ .logo{width:34px;height:34px;flex-basis:34px;font-size:17px}
+ .brand-name{font-size:15px;letter-spacing:1.1px}
+ .brand-tagline{font-size:6.5px;letter-spacing:.55px;white-space:normal;max-width:155px}
+ .header-tools{gap:7px;flex:1;}
+ .theme-picker{min-width:0;max-width:145px;}
+ .theme-picker .custom-select{max-width:138px;}
+ .theme-picker .custom-select-trigger{min-height:42px;max-width:138px;font-size:11px;padding:8px 7px;gap:6px;}
+ .menu{flex:0 0 auto;min-width:42px;min-height:42px;padding:7px 10px;border-radius:7px;}
+ main{padding-inline:12px;}
+ section{scroll-margin-top:78px;}
+ .head{gap:10px;}
+ .card{padding:15px;}
+ .photo{height:135px;}
+ .form{gap:10px;}
+ .field input,.field select,.field textarea{min-height:44px;}
+ .actions{gap:9px;}
+ .actions .btn{flex:1 1 150px;text-align:center;}
+}
+@media(max-width:380px){
+ header{padding-inline:9px;}
+ .brand{max-width:47%;gap:6px;}
+ .logo{width:30px;height:30px;flex-basis:30px;font-size:15px;}
+ .brand-name{font-size:13px;letter-spacing:.7px;}
+ .brand-tagline{font-size:6px;letter-spacing:.25px;}
+ .theme-picker .custom-select{max-width:116px;}
+ .theme-picker .custom-select-trigger{max-width:116px;padding-inline:6px;font-size:10px;}
+ .header-tools{gap:5px;}
+ .menu{min-width:40px;min-height:42px;padding-inline:8px;}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+<style id="athlonix-navigation-polish">
+/* Keep the original vertical, anchor-based navigation; no panel-slide transitions. */
+.nav{transition:background .18s ease,border-color .18s ease,color .18s ease;min-height:42px;display:flex;align-items:center}
+.nav.active{background:linear-gradient(100deg,#b6ff3b22,#b6ff3b05);border-color:#b6ff3b66;box-shadow:inset 3px 0 var(--cyan),0 0 16px #b6ff3b0b}
+@media(max-width:1000px){body.menu-open:before{content:"";position:fixed;inset:66px 0 0;background:#020609a8;backdrop-filter:blur(3px);z-index:19}aside{width:min(300px,86vw);max-height:calc(100dvh - 66px);overflow-y:auto;overscroll-behavior:contain}aside.open{z-index:20}header{z-index:21}}
+/* Dashboard polish: stronger hierarchy, legible stats and clearer action focus. */
+.hero{box-shadow:0 20px 55px #0003,inset 0 0 0 1px #b6ff3b0b}
+.hero h1{max-width:850px;text-wrap:balance}
+.hero .eyebrow{display:inline-flex;align-items:center;border:1px solid #b6ff3b55;background:#080f13cc;border-radius:999px;padding:9px 12px;letter-spacing:1.4px}
+.hero .actions .btn{min-height:44px}
+.card{box-shadow:0 8px 24px #00012;transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}
+.card:focus-within{border-color:#b6ff3b77;box-shadow:0 0 0 2px #b6ff3b13,0 12px 30px #0003}
+.stat strong{font-variant-numeric:tabular-nums}
+.head h2{line-height:1.25;text-wrap:balance}
+:focus-visible{outline:2px solid var(--cyan)!important;outline-offset:3px}
+#videoOut,#esportVideoOut{overflow-wrap:anywhere}
+@media(max-width:620px){.hero{min-height:350px}.hero h1{font-size:clamp(31px,10vw,46px);line-height:1.1}.hero p{font-size:13px}.btn{min-height:44px;padding:12px 13px;letter-spacing:.5px}.smallbtn{min-height:40px}.video{max-height:240px}input,select,textarea{font-size:16px!important}}
+@media(max-width:420px){.theme-picker span{display:none}.theme-picker select{max-width:115px;padding:8px 5px}.brand{gap:7px;letter-spacing:1px}.logo{width:30px;height:30px}.hero{padding:22px 15px}.stat{min-height:110px}.stat strong{font-size:24px}.grid{gap:10px}.card{padding:15px}}
+/* ATHLONIX 6.6 brand system + mobile layout refinement */
+.brand{gap:11px;min-width:0;flex-shrink:0}
+.brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.brand-name{font:900 clamp(15px,1.4vw,20px)/1 Orbitron,Inter,sans-serif;letter-spacing:2px;white-space:nowrap}
+.brand-tagline{display:block;color:#c4d4c9;font:700 8px/1.3 Inter,Arial,sans-serif;letter-spacing:1.45px;white-space:nowrap}
+.logo{border-radius:5px;font:900 20px Orbitron,sans-serif;flex:0 0 auto}
+.header-tools{display:flex;align-items:center;gap:14px;min-width:0}
+.theme-picker{display:flex;align-items:center;gap:8px;min-width:0}
+.theme-picker span{font:700 9px Orbitron,sans-serif;letter-spacing:1px;color:var(--muted);white-space:nowrap}
+.theme-picker select{max-width:180px;min-width:0}
+.btn,.smallbtn,.menu,.nav{touch-action:manipulation}
+img,video,canvas{max-width:100%}
+.card,.sport,.field,.out{overflow-wrap:anywhere}
+@media(max-width:760px){header{gap:10px;padding-inline:14px}.header-tools{gap:8px}.brand{gap:8px}.brand-tagline{font-size:7px;letter-spacing:.9px}.theme-picker{gap:5px}.theme-picker select{max-width:132px}.status{display:none}}
+@media(max-width:520px){header{height:66px;padding-inline:10px}.brand-name{font-size:14px;letter-spacing:1.3px}.brand-tagline{max-width:172px;white-space:normal;font-size:6.5px;letter-spacing:.65px}.logo{width:29px;height:29px;font-size:16px}.header-tools{gap:6px}.theme-picker select{max-width:112px;padding:8px 5px}.menu{padding:8px 10px;min-width:42px;min-height:42px}.head h2{font-size:clamp(19px,6vw,24px)}.actions .btn{flex:1 1 auto}.form{gap:10px}.field input,.field select,.field textarea{min-height:44px}.out{font-size:11px;line-height:1.65}.video{width:100%;height:auto;max-height:220px}}
+@media(max-width:360px){.brand-tagline{display:none}.brand-name{font-size:13px}.brand{gap:6px}.theme-picker select{max-width:100px;font-size:12px}.hero h1{font-size:30px}.card{padding:13px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.btn,.nav{transition:none!important}}
+</style>
+<style id="tactical-time-machine-styles">#timeMachine .video{width:100%;max-height:340px;background:#05090b;border:1px solid var(--line);border-radius:7px}#timeMachine .out{white-space:pre-wrap;line-height:1.7;min-height:180px}#timeMachine .hint{margin-top:12px}</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo" aria-hidden="true">A</div><div class="brand-copy"><div class="brand-name">ATHLON<b>IX</b></div><span class="brand-tagline">WHERE PERFORMANCE MEETS INTELLIGENCE</span></div></div><div class="header-tools"><label class="theme-picker"><span>ACTIVE SPORT</span><select id="themeSport" aria-label="Select active sport"><option value="Hockey">🏑 Hockey</option><option value="Cricket">🏏 Cricket</option><option value="Football">⚽ Football</option><option value="Badminton">🏸 Badminton</option><option value="Athletics">🏃 Athletics</option><option value="Esports">🎮 Esports</option></select></label><span class="status" id="appStatus">● LOCAL APP READY</span><button class="menu" id="menu">☰</button></div></header>
+<div class="shell">
+<aside id="sidebar"><div class="navtitle">COMMAND CENTER</div>
+<a class="nav active" href="#home" aria-current="page">⌂ &nbsp; Overview</a><a class="nav" href="#sports">◈ &nbsp; Sports & Positions</a><a class="nav" href="#esports">▣ &nbsp; Esports Arena</a><a class="nav" href="#tracker">⌁ &nbsp; Performance Tracker</a><a class="nav" href="#coach">✳ &nbsp; AI Coach Lab</a><a class="nav" href="#schedule">▦ &nbsp; Smart Schedule</a><a class="nav" href="#focus">◎ &nbsp; Focus Training</a><a class="nav" href="#rules">▤ &nbsp; Rules Database</a><a class="nav" href="#formation">▦ &nbsp; Team & Court Designer</a><a class="nav" href="#strategy">♟ &nbsp; Strategy Builder</a><a class="nav" href="#timeMachine">⏳ &nbsp; Tactical Time Machine</a>
+<div class="asidebox"><div class="eyebrow">Athlete mode</div><p style="margin-top:9px;color:white;font-weight:800">TRAIN SMARTER.</p>Log sessions, sharpen your focus and build your own training routine.</div></aside>
+<main>
+<section class="hero" id="home"><div class="hero-inner"><div class="eyebrow">No-key athlete intelligence</div><h1>TRAIN LIKE AN<br><span class="glow">ALGORITHM.</span></h1><p>A local-first training workspace: analyse body pose and movement in your browser, build strategies, and keep video clips on your device. No API key or cloud video upload.</p><div class="actions"><a class="btn" href="#coach">Launch AI Coach ↗</a><a class="btn alt" href="#tracker">Open Performance Lab</a></div></div></section>
+<section><div class="head"><div><div class="eyebrow">Live dashboard</div><h2>Your command centre</h2><p>Session totals update from the training records saved in this browser.</p></div><span class="tag">LOCAL DATA / ACTIVE</span></div><div class="grid">
+<div class="card stat"><small>SESSIONS LOGGED</small><strong id="count">00</strong><div class="good">↗ Consistency starts here</div></div><div class="card stat"><small>TRAINING MINUTES</small><strong id="minutes">000</strong><div class="good">↗ Every session counts</div></div><div class="card stat"><small>FOCUS SCORE</small><strong id="focusScore">--<em>/10</em></strong><div class="good">◇ Complete a focus drill</div></div><div class="card stat"><small>ATHLETE STATUS</small><strong style="font-size:18px;color:var(--green)">BUILDING</strong><div class="good">● Progress over perfection</div></div>
+</div></section>
+<section id="sports"><div class="head"><div><div class="eyebrow">Sport modules</div><h2>Select your arena</h2><p>Choose a sport to load it into your tracker, coach and schedule.</p></div><span class="tag">05 MODULES</span></div><div class="grid">
+<article class="card sport"><div class="photo" style="background-image:url('https://images.unsplash.com/photo-1515703407324-5f753afd8be8?auto=format&fit=crop&w=900&q=80')"></div><div class="sportbody"><div class="sporthead"><h3>HOCKEY</h3><span>01 / FIELD</span></div><p>Ball control, passing lanes, scanning and positioning.</p><button class="smallbtn" onclick="selectSport('Hockey')">SELECT SPORT ↗</button></div></article>
+<article class="card sport"><div class="photo" style="background-image:url('https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=900&q=80')"></div><div class="sportbody"><div class="sporthead"><h3>CRICKET</h3><span>02 / BAT & BALL</span></div><p>Batting timing, bowling rhythm, fielding reactions.</p><button class="smallbtn" onclick="selectSport('Cricket')">SELECT SPORT ↗</button></div></article>
+<article class="card sport"><div class="photo" style="background-image:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=900&q=80')"></div><div class="sportbody"><div class="sporthead"><h3>FOOTBALL</h3><span>03 / FIELD</span></div><p>First touch, movement, passing and decisions.</p><button class="smallbtn" onclick="selectSport('Football')">SELECT SPORT ↗</button></div></article>
+<article class="card sport"><div class="photo" style="background-image:url('https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=80')"></div><div class="sportbody"><div class="sporthead"><h3>BADMINTON</h3><span>04 / COURT</span></div><p>Footwork, recovery, shot placement and court coverage.</p><button class="smallbtn" onclick="selectSport('Badminton')">SELECT SPORT ↗</button></div></article>
+<article class="card sport"><div class="photo" style="background-image:url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=900&q=80')"></div><div class="sportbody"><div class="sporthead"><h3>ATHLETICS</h3><span>05 / TRACK</span></div><p>Running mechanics, pacing, starts and recovery.</p><button class="smallbtn" onclick="selectSport('Athletics')">SELECT SPORT ↗</button></div></article>
+<article class="card sport" style="display:flex;align-items:center;background:radial-gradient(circle at 80% 10%,#a66bff24,transparent 50%),#090f1a"><div class="sportbody"><div class="eyebrow">Data into decisions</div><h3 style="font:800 21px Orbitron,sans-serif;line-height:1.5;margin:14px 0">YOUR GAME.<br><span style="color:var(--violet)">YOUR EDGE.</span></h3><p>Small improvements create long-term progress.</p><a class="btn purple" style="display:inline-block;margin-top:15px" href="#coach">Open Coach Lab</a></div></article>
+</div></section>
+<section id="esports"><div class="head"><div><div class="eyebrow">Competitive gaming module</div><h2>Esports arena</h2><p>Explore major competitive game genres, practise smarter and review your own gameplay clips.</p></div><span class="tag">DIGITAL COMPETITION</span></div><div class="grid">
+<article class="card sport"><div class="photo" style="background:linear-gradient(135deg,#101b37,#37205b 55%,#0a101c);display:grid;place-items:center"><span style="font:900 26px Orbitron,sans-serif;color:#a66bff;text-shadow:0 0 20px #a66bff">FPS / TACTICAL</span></div><div class="sportbody"><div class="sporthead"><h3>TACTICAL SHOOTERS</h3><span>01 / FPS</span></div><p>Examples: VALORANT, Counter-Strike 2. Focus on map awareness, communication, crosshair placement and calm decisions.</p><button class="smallbtn" onclick="loadEsport('Tactical shooters')">OPEN TRAINING TIPS ↗</button></div></article>
+<article class="card sport"><div class="photo" style="background:linear-gradient(135deg,#092b2b,#0c5260 55%,#0a101c);display:grid;place-items:center"><span style="font:900 26px Orbitron,sans-serif;color:#37e6ff;text-shadow:0 0 20px #37e6ff">MOBA</span></div><div class="sportbody"><div class="sporthead"><h3>MOBA</h3><span>02 / STRATEGY</span></div><p>Examples: League of Legends, Dota 2, Mobile Legends: Bang Bang. Train objective timing, role knowledge, map checks and teamwork.</p><button class="smallbtn" onclick="loadEsport('MOBA')">OPEN TRAINING TIPS ↗</button></div></article>
+<article class="card sport"><div class="photo" style="background:linear-gradient(135deg,#301525,#64243b 55%,#0a101c);display:grid;place-items:center"><span style="font:900 26px Orbitron,sans-serif;color:#ff365e;text-shadow:0 0 20px #ff365e">BATTLE ROYALE</span></div><div class="sportbody"><div class="sporthead"><h3>BATTLE ROYALE</h3><span>03 / SURVIVAL</span></div><p>Examples: BGMI, PUBG Mobile, Fortnite, Apex Legends. Practise positioning, rotations, resource choices and end-game composure.</p><button class="smallbtn" onclick="loadEsport('Battle royale')">OPEN TRAINING TIPS ↗</button></div></article>
+<article class="card sport"><div class="photo" style="background:linear-gradient(135deg,#202b12,#52611b 55%,#0a101c);display:grid;place-items:center"><span style="font:900 26px Orbitron,sans-serif;color:#b8ff66;text-shadow:0 0 20px #b8ff66">SPORTS SIM</span></div><div class="sportbody"><div class="sporthead"><h3>SPORTS & RACING</h3><span>04 / SIM</span></div><p>Examples: EA SPORTS FC, Rocket League, Gran Turismo esports. Improve timing, spacing, route planning and repeatable mechanics.</p><button class="smallbtn" onclick="loadEsport('Sports and racing')">OPEN TRAINING TIPS ↗</button></div></article>
+<article class="card sport"><div class="photo" style="background:linear-gradient(135deg,#10223a,#214d73 55%,#0a101c);display:grid;place-items:center"><span style="font:900 26px Orbitron,sans-serif;color:#8bd2ff;text-shadow:0 0 20px #8bd2ff">FIGHTING</span></div><div class="sportbody"><div class="sporthead"><h3>FIGHTING GAMES</h3><span>05 / DUEL</span></div><p>Examples: Street Fighter 6, Tekken 8, Super Smash Bros. Ultimate. Work on spacing, matchup knowledge, defence and deliberate practice.</p><button class="smallbtn" onclick="loadEsport('Fighting games')">OPEN TRAINING TIPS ↗</button></div></article>
+<article class="card sport"><div class="photo" style="background:linear-gradient(135deg,#271b42,#55327c 55%,#0a101c);display:grid;place-items:center"><span style="font:900 26px Orbitron,sans-serif;color:#d1a8ff;text-shadow:0 0 20px #a66bff">MOBILE ESPORTS</span></div><div class="sportbody"><div class="sporthead"><h3>MOBILE COMPETITIVE</h3><span>06 / MOBILE</span></div><p>Examples: Free Fire MAX, Clash Royale, Pokémon UNITE. Practise comfortable controls, decision-making, resource use and team coordination.</p><button class="smallbtn" onclick="loadEsport('Mobile competitive')">OPEN TRAINING TIPS ↗</button></div></article>
+<div class="card half"><h3>Esports coaching brief</h3><p>Select a game genre to get a focused practice checklist. These are coaching prompts, not live game telemetry.</p><div class="field" style="margin-top:14px"><label>Game genre</label><select id="esportGenre" onchange="loadEsport(this.value)"><option value="Tactical shooters">Tactical shooters (VALORANT / CS2)</option><option value="MOBA">MOBA (LoL / Dota 2 / MLBB)</option><option value="Battle royale">Battle royale (BGMI / Fortnite)</option><option value="Sports and racing">Sports & racing (EA SPORTS FC / Rocket League)</option><option value="Fighting games">Fighting games (Street Fighter / Tekken)</option><option value="Mobile competitive">Mobile competitive (Free Fire MAX / Clash Royale)</option></select></div><div class="out" id="esportTips">Choose a genre to load practice tips.</div></div>
+<div class="card half"><h3>Gameplay video review</h3><p>Run on-device visual analysis on sampled gameplay frames: motion intensity, scene changes and review timestamps.</p><div class="field" style="margin-top:14px"><label>Upload gameplay clip</label><input id="esportVideo" type="file" accept="video/*"></div><video class="video" id="esportPreview" controls style="display:none"></video><div class="field" style="margin-top:12px"><label>What do you want to improve?</label><select id="esportFocus"><option>Decision-making</option><option>Map awareness / positioning</option><option>Team communication</option><option>Aim / mechanics</option><option>Resource management</option><option>Consistency under pressure</option></select></div><button class="btn purple" style="margin-top:14px" onclick="reviewEsportVideo()">Run gameplay visual analysis ↗</button><div class="out" id="esportVideoOut">Choose a clip, then run analysis. Frames are processed locally in your browser.</div><p class="hint">This measures real visual changes and likely high-action timestamps. It cannot infer kills, aim accuracy, map strategy or game events without a game-specific model/replay data.</p></div>
+</div></section>
+<section id="tracker"><div class="head"><div><div class="eyebrow">Performance lab</div><h2>Training tracker</h2><p>Log your sessions and build a simple training history.</p></div><span class="tag">SESSION LOG</span></div><div class="grid">
+<div class="card half"><h3>＋ Log a training session</h3><p>Save a record of what you actually practised.</p><form class="form" id="sessionForm"><div class="field"><label>Sport</label><select id="trackSport"><option>Hockey</option><option>Cricket</option><option>Football</option><option>Badminton</option><option>Athletics</option><option>Esports</option></select></div><div class="field"><label>Duration (minutes)</label><input id="duration" type="number" min="1" max="600" value="45" required></div><div class="field"><label>Session type</label><select id="type"><option>Skills</option><option>Fitness</option><option>Match / Game</option><option>Recovery</option><option>Strength</option></select></div><div class="field"><label>Effort (1–10)</label><select id="effort"><option>5</option><option>6</option><option>7</option><option>8</option><option>4</option><option>3</option><option>9</option><option>10</option></select></div><div class="field" style="grid-column:1/-1"><label>Notes</label><input id="notes" maxlength="180" placeholder="e.g. passing under pressure, warm-up"></div><button class="btn" style="grid-column:1/-1">Save session +</button></form><div class="out" id="history">No sessions logged yet.</div><div class="history-actions"><button class="btn alt" type="button" onclick="exportSessions()">Export training CSV ↓</button><button class="btn alt" type="button" onclick="clearSessions()">Clear saved history</button></div></div>
+<div class="card half"><h3>Position-specific suggestions</h3><p>Choose your role for focused, practical training tips.</p><div class="form"><div class="field"><label>Sport</label><select id="posSport" onchange="updatePositions()"><option>Hockey</option><option>Cricket</option><option>Football</option><option>Badminton</option><option>Athletics</option><option>Esports</option></select></div><div class="field"><label>Position / event</label><select id="position"></select></div></div><button class="btn" style="margin-top:14px" onclick="positionTips()">Generate suggestions ↗</button><div class="out" id="posOutput">Your role-specific tips appear here.</div><p class="hint">Real-time GPS, speed, heart rate and motion tracking require compatible hardware. This page logs sessions only.</p></div>
+</div></section>
+<section id="coach"><div class="head"><div><div class="eyebrow">Neural coaching interface</div><h2>Smart coach lab</h2><p>No API key needed. Video processing stays in your browser; built-in coaching uses measured movement cues, not cloud AI.</p></div><span class="tag">VIDEO REVIEW</span></div><div class="grid">
+<div class="card half"><h3>01 / Upload training video</h3><p>ATHLONIX runs a local pose model and object detector in your browser. It measures visible body landmarks, plots movement over time, and creates timestamped review prompts from those measurements. It does not use a cloud AI, cannot reliably identify every sport or action, and never uploads your video.</p><div class="form" style="margin-top:14px"><div class="field"><label>Sport</label><select id="videoSport" onchange="updateVideoSkills()"><option>Hockey</option><option>Cricket</option><option>Football</option><option>Badminton</option><option>Athletics</option><option>Esports</option></select></div><div class="field"><label>Skill in this clip</label><select id="videoSkill"><option>General movement</option></select></div><div class="field" style="grid-column:1/-1"><label>Choose a video</label><input id="videoFile" type="file" accept="video/*" aria-describedby="videoUploadHint"><small class="hint" id="videoUploadHint">For smoother analysis, use a short clip under 200 MB with your full body visible and good lighting.</small></div></div><video class="video" id="preview" controls style="display:none"></video><div class="checks" id="checks"><label><input type="checkbox">My full movement is visible.</label><label><input type="checkbox">The camera angle shows the skill clearly.</label><label><input type="checkbox">I can review balance and follow-through.</label><label><input type="checkbox">I chose one skill to improve.</label><label style="border-color:var(--cyan)"><input type="checkbox" id="confirmSportClip">This video really shows the selected sport and skill. (ATHLONIX cannot verify this automatically.)</label></div><div class="actions" style="margin-top:14px;flex-wrap:wrap"><button class="btn" id="runPoseBtn" onclick="reviewVideo()">Run body-pose analysis ↗</button><button class="btn purple" type="button" id="runVisionBtn" onclick="runLocalVideoUnderstanding()">Run local movement timeline ↗</button></div><div class="out" id="videoOut">Choose a clear, full-body video, then run body-pose analysis.</div><div class="out" id="visionVideoOut" aria-live="polite">LOCAL-ONLY MODE · No API key. Run body-pose analysis to generate measured, timestamped movement cues. Your video stays in this browser.</div><div class="card" style="margin-top:12px;padding:12px"><h4 style="margin:0 0 8px">Movement timeline</h4><canvas id="poseTrendChart" width="720" height="230" style="width:100%;height:auto;background:#071018;border:1px solid #20313a;border-radius:10px" aria-label="Graph of measured joint angles over time"></canvas><p class="hint">The graph plots measured left/right knee and elbow angles. The timeline below is generated locally from measured body-position changes and optional object detections—not from a cloud AI. Events between sampled frames can be missed.</p><div id="aiEventTimeline" class="timeline" aria-live="polite"><div class="day"><b>LOCAL CUES</b><span>Run local movement timeline to show timestamps for measurable body-position changes.</span></div></div></div></div>
+<div class="card half"><h3>02 / Ask your AI coach</h3><p>Ask for a tailored practice plan without an API key. Responses use sport-specific guidance and question matching, not a generative cloud model.</p><div class="form"><div class="field"><label>Sport</label><select id="coachSport"><option>Hockey</option><option>Cricket</option><option>Football</option><option>Badminton</option><option>Athletics</option><option>Esports</option></select></div><div class="field"><label>Focus area</label><select id="coachFocus"><option>Technique</option><option>Speed & agility</option><option>Decision-making</option><option>Fitness & recovery</option><option>Confidence & focus</option></select></div><div class="field" style="grid-column:1/-1"><label>Your question</label><textarea id="question" placeholder="Example: I play left half in hockey. How can I scan earlier and pass accurately under pressure?"></textarea></div></div><button class="btn purple" id="askCoachBtn" style="margin-top:14px" onclick="askCoach()">Generate coaching plan ↗</button><div class="out" id="coachOut" aria-live="polite">Ready. Ask a question for no-key coaching guidance.</div><p class="hint">AI advice can be wrong. Use it for practice ideas, not medical advice; ask your qualified coach to check technique and training load.</p></div>
+</div>
+<div class="grid" style="margin-top:14px"><div class="card chatcard"><h3>03 / Video Coach Chat</h3><p>Run body-pose analysis or a local movement timeline. Video frames are processed in your browser and are not sent to a server.</p><div class="chatwindow" id="videoChat" role="log" aria-live="polite"><div class="chatmsg bot">Hi! I’m your ATHLONIX Video Coach. Upload a clear training clip and press “Run pose analysis”. I’ll use the measured pose report to suggest practical next steps. I can measure visible body landmarks, but I cannot automatically judge ball/stick contact, tactics or correct technique from angles alone.</div></div><div class="chatquick"><button type="button" onclick="quickVideoChat('Explain my video results')">Explain my results</button><button type="button" onclick="quickVideoChat('Give me 3 drills based on my results')">Suggest 3 drills</button><button type="button" onclick="quickVideoChat('What should I improve first?')">What to improve first?</button></div><form class="chatrow" id="videoChatForm"><input id="videoChatInput" type="text" autocomplete="off" placeholder="Ask about your video or next practice…" aria-label="Ask video coach"><button class="btn" type="submit">Send ↗</button></form><div class="chatstatus" id="videoChatStatus">Status: local, no-key coaching mode ready.</div><p class="hint">Body-pose measurements and the movement timeline run in your browser. The first run needs internet access to download the open-source model files; the video itself is not uploaded. This is not a full semantic video-understanding model.</p></div></div>
+</section>
+<section id="strategy"><div class="head"><div><div class="eyebrow">Tactical thinking engine</div><h2>Game Strategy Builder</h2><p>Build a practical starting strategy for your sport, match situation and team strengths.</p></div><span class="tag">PLAN · ADAPT · REVIEW</span></div>
+<div class="grid"><div class="card half"><h3>Set the match scenario</h3><div class="form">
+<div class="field"><label for="strategySport">Sport</label><select id="strategySport"><option>Hockey</option><option>Football</option><option>Cricket</option><option>Badminton</option><option>Athletics</option><option>Esports</option></select></div>
+<div class="field"><label for="strategySituation">Situation</label><select id="strategySituation"><option value="balanced">Start of match / balanced</option><option value="leading">Protecting a lead</option><option value="trailing">Chasing the game</option><option value="press">Opponent presses aggressively</option><option value="defend">Need to defend carefully</option><option value="final">Final minutes / high pressure</option></select></div>
+<div class="field"><label for="strategyStrength">Team strength</label><select id="strategyStrength"><option value="passing">Passing and teamwork</option><option value="speed">Speed and transitions</option><option value="defence">Defensive organisation</option><option value="control">Possession / control</option><option value="individual">Strong individual skills</option></select></div>
+<div class="field"><label for="strategyOpponent">Opponent style</label><select id="strategyOpponent"><option value="unknown">Not sure yet</option><option value="press">High pressure / pressing</option><option value="compact">Compact defence</option><option value="fast">Fast counter-attacks</option><option value="possession">Keeps possession</option></select></div>
+<div class="field" style="grid-column:1/-1"><label for="strategyNotes">Extra context (optional)</label><textarea id="strategyNotes" maxlength="300" placeholder="e.g. we struggle to keep width, or their right side is quick"></textarea></div>
+</div><button class="btn purple" style="margin-top:14px" onclick="generateStrategy()">Build my strategy ↗</button></div>
+<div class="card half"><h3>Your tactical plan</h3><div class="out" id="strategyOut" aria-live="polite">Choose the scenario and press “Build my strategy”. The plan will include priorities, roles, adjustments and a review checklist.</div><p class="hint">This creates a tactical starting point, not a guaranteed winning formula. Adapt it to your players, competition rules and coach’s instructions. Never use a plan that compromises safety.</p></div></div></section>
+<section id="timeMachine"><div class="head"><div><div class="eyebrow">Match-moment replay lab</div><h2>Tactical Time Machine</h2><p>Review a key moment, explore three possible decisions, and compare their risks. Choose the moment yourself; this prototype does not automatically detect match events.</p></div><span class="tag">PAUSE · REPLAY · RE-THINK</span></div>
+<div class="grid"><div class="card half"><h3>01 / Select your match moment</h3><div class="form"><div class="field"><label for="tmSport">Sport</label><select id="tmSport"><option>Hockey</option><option>Football</option><option>Cricket</option><option>Badminton</option><option>Athletics</option><option>Esports</option></select></div><div class="field"><label for="tmSituation">Moment / situation</label><select id="tmSituation"><option value="lost">Possession lost / turnover</option><option value="attack">Attacking opportunity</option><option value="pressure">Opponent applying pressure</option><option value="defend">Protecting a lead / defending</option><option value="counter">Opponent counter-attack</option><option value="final">Final minutes / high pressure</option><option value="restart">Restart / set play</option></select></div><div class="field"><label for="tmTimestamp">Video timestamp (seconds)</label><input id="tmTimestamp" type="number" min="0" step="1" value="0" placeholder="e.g. 42"></div><div class="field"><label for="tmScore">Score / match context</label><input id="tmScore" maxlength="100" placeholder="e.g. level score, 5 minutes left"></div><div class="field" style="grid-column:1/-1"><label for="tmVideo">Upload match clip (optional)</label><input id="tmVideo" type="file" accept="video/*"><small class="hint">Video stays in this browser. Use footage you have permission to review.</small></div><div class="field" style="grid-column:1/-1"><label for="tmNotes">What happened? (optional)</label><textarea id="tmNotes" maxlength="400" placeholder="e.g. our left half lost the ball near the sideline; two teammates were available"></textarea></div></div><video class="video" id="tmPreview" controls style="display:none;margin-top:12px"></video><div class="actions" style="margin-top:12px"><button class="btn alt" type="button" onclick="tmJumpToMoment()">Jump to moment ↗</button><button class="btn" type="button" onclick="buildTacticalTimeMachine()">Explore alternatives ↗</button></div></div>
+<div class="card half"><h3>02 / Three possible decisions</h3><div class="out" id="tmOutput" aria-live="polite">Choose the sport and situation, optionally add a video and timestamp, then press “Explore alternatives”. ATHLONIX will show three tactical options, trade-offs and a review question.</div><p class="hint">These are scenario-based suggestions, not predictions of what definitely would have happened. Confirm tactics with your coach and follow match rules and safety guidance.</p><button class="smallbtn" type="button" style="margin-top:10px" onclick="saveTacticalMoment()">Save this review locally</button><div class="out" id="tmSaved" style="margin-top:10px">Saved reviews stay on this device only.</div></div></div></section>
+<section id="schedule"><div class="head"><div><div class="eyebrow">Smart planning engine</div><h2>Build your schedule</h2><p>Create a balanced weekly training template around your availability.</p></div><span class="tag">WEEKLY PROTOCOL</span></div><div class="grid">
+<div class="card half"><h3>Configure your week</h3><div class="form"><div class="field"><label>Primary sport</label><select id="schedSport"><option>Hockey</option><option>Cricket</option><option>Football</option><option>Badminton</option><option>Athletics</option><option>Esports</option></select></div><div class="field"><label>Level</label><select id="level"><option>Beginner</option><option selected>Intermediate</option><option>Advanced</option></select></div><div class="field"><label>Days per week</label><select id="days"><option>3</option><option>4</option><option selected>5</option><option>6</option></select></div><div class="field"><label>Daily time</label><select id="time"><option>30 minutes</option><option selected>45 minutes</option><option>60 minutes</option><option>90 minutes</option></select></div></div><button class="btn" style="margin-top:14px" onclick="makeSchedule()">Generate weekly plan ↗</button></div>
+<div class="card half"><h3>Recovery protocol</h3><div class="rules" style="grid-template-columns:1fr"><div class="rule"><b>01 / Warm up</b><span>Start with easy movement and dynamic mobility.</span></div><div class="rule"><b>02 / Build gradually</b><span>Increase workload slowly and stop for pain or unusual discomfort.</span></div><div class="rule"><b>03 / Recover</b><span>Sleep, hydration, meals and rest days support progress.</span></div></div></div>
+<div class="card full"><h3>Weekly training blueprint</h3><div class="timeline" id="scheduleOut"><div class="day"><b>MON–SUN</b><span>Choose your settings and generate a plan.</span></div></div></div>
+</div></section>
+<section id="focus"><div class="head"><div><div class="eyebrow">Mind performance</div><h2>Focus training</h2><p>Practise attention, composure and decision-making with a short mental drill.</p></div><span class="tag">MIND / BODY</span></div><div class="grid"><div class="card half"><h3>⚡ Reaction-time drill</h3><p>Tap start, wait for the signal, then tap again as quickly as possible. Stay relaxed and try to improve your own result.</p><div class="actions"><button class="btn" id="reactionBtn" onclick="reaction()">Start focus drill</button><b id="reactionResult" style="font:700 10px Orbitron,sans-serif;color:var(--cyan);align-self:center">READY WHEN YOU ARE</b></div></div><div class="card half"><h3>Reset between plays</h3><div class="out">1. Relax your shoulders.
+2. Breathe in gently for 4 counts.
+3. Breathe out slowly for 4 counts.
+4. Name your next simple action.
+5. Bring your attention back to play.</div><p class="hint">Repeat comfortably; never force your breathing.</p></div></div></section>
+
+<section id="formation"><div class="head"><div><div class="eyebrow">Multi-sport tactical board</div><h2>Team & Court Designer</h2><p>Plan positions for field hockey, football, cricket, and badminton. Choose a sport and preset, rename players, then drag markers to adjust the setup.</p></div><span class="tag">DESIGN YOUR SHAPE</span></div>
+<div class="grid"><div class="card half"><div class="form"><div class="field"><label for="formationSport">Sport</label><select id="formationSport"><option>Hockey</option><option>Football</option><option>Cricket</option><option>Badminton</option></select></div><div class="field"><label for="formationPreset">Formation / setup preset</label><select id="formationPreset"></select></div><div class="field"><label for="formationFocus">Tactical focus</label><select id="formationFocus"><option>Balanced build-up</option><option>High pressing</option><option>Defensive shape</option><option>Wide attacks</option><option>Quick counter-attacks</option></select></div></div><div class="actions" style="margin-top:14px"><button class="btn" type="button" onclick="applyHockeyFormation()">Apply formation ↗</button><button class="btn alt" type="button" onclick="resetHockeyFormation()">Reset positions</button><button class="btn alt" type="button" onclick="saveHockeyFormation()">Save layout</button></div><div class="out" id="formationFeedback" aria-live="polite">Choose a sport and setup, then drag player markers to explore positions.</div><p class="hint">This is a tactical planning aid, not a prescribed formation. Adjust positions to your team's roles, opponents, rules and coach's plan.</p></div>
+<div class="card half"><h3>Field board</h3><div id="hockeyField" class="hockey-field" data-sport="Hockey" role="group" aria-label="Draggable team and court positions"><div id="formationMarkings"></div><div id="formationPlayers"></div></div><div class="field" style="margin-top:12px"><label for="selectedPlayer">Selected player / position</label><select id="selectedPlayer"></select></div><div class="field" style="margin-top:10px"><label for="playerNameInput">Player name for selected position</label><input id="playerNameInput" type="text" maxlength="22" placeholder="Enter player name" autocomplete="off"><small class="hint">Select a player, type their name, and it will appear on the field.</small></div><p class="hint">Tip: On a phone, tap a player to select it, then drag to move; use the position list to switch selection. Badminton setups use court positions; cricket uses a schematic field layout.</p></div></div></section>
+<style>
+.hockey-field{position:relative;width:100%;height:420px;overflow:hidden;border:2px solid #c4f5d8;border-radius:12px;background:#126746;touch-action:pan-y;isolation:isolate}
+#formationMarkings{position:absolute;inset:0;pointer-events:none;color:#ffffffd9}
+#formationMarkings:before{content:"";position:absolute;inset:10px;border:1px solid currentColor}
+#formationMarkings .mark{position:absolute;border:1px solid currentColor;pointer-events:none}
+.formation-player{position:absolute;transform:translate(-50%,-50%);width:84px;min-height:42px;padding:3px 5px;border-radius:10px;border:2px solid white;background:#132b48;color:white;font-size:10px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;line-height:1.1;cursor:grab;touch-action:none;box-shadow:0 2px 8px #001a;z-index:2}
+.formation-player.forward{background:#e65a43}.formation-player.midfielder{background:#087eaa}.formation-player:focus,.formation-player.selected{outline:3px solid #ffe66d;outline-offset:2px;z-index:4}.formation-player:active{cursor:grabbing}
+.hockey-field[data-sport="Football"]{background:#176a43}.hockey-field[data-sport="Cricket"]{background:radial-gradient(ellipse at center,#4d995b 0 34%,#26794b 35% 61%,#176a43 62%)}.hockey-field[data-sport="Badminton"]{background:#176b58}
+@media(max-width:600px){.hockey-field{height:360px}.formation-player{width:68px;min-height:38px;font-size:9px;padding:2px 3px}}
+
+/* ATHLONIX FUSION: Phantom Esports + Cyber Blue + Neon Performance */
+:root{--bg:#070914;--panel:#101326;--line:#293454;--cyan:#35dfff;--violet:#a66bff;--red:#ff4f8b;--white:#f5f7ff;--muted:#a3abc7;--green:#b6ff3b;--glow-a:#35dfff22;--glow-b:#a66bff24}
+body{background-color:var(--bg);background-image:radial-gradient(ellipse at 8% 0%,#35dfff18,transparent 38%),radial-gradient(ellipse at 92% 14%,#a66bff20,transparent 35%),linear-gradient(#35dfff08 1px,transparent 1px),linear-gradient(90deg,#35dfff08 1px,transparent 1px);background-size:auto,auto,36px 36px,36px 36px}
+header{background:#080b17f2;border-bottom-color:#35dfff66}
+.logo{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 20px #35dfff30}
+.status{color:var(--green);border-color:#b6ff3b55}
+aside{background:#090c19f5;border-right-color:var(--line)}
+.nav:hover,.nav.active{border-color:#35dfff66;background:linear-gradient(90deg,#35dfff18,transparent);box-shadow:inset 3px 0 var(--cyan)}
+.asidebox{background:linear-gradient(140deg,#17162d,#0b0d1a);border-color:var(--line)}
+.hero{border-color:#3b3b65;background:linear-gradient(90deg,#070914f7 0%,#0b1022ed 53%,#0a0d1a88 100%),url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1600&q=85') center/cover}
+.card{background:linear-gradient(145deg,#14182cf5,#0b0e1bf8);border-color:#293454;box-shadow:0 7px 24px #0003}
+.card:before{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--green));box-shadow:0 0 12px #a66bff24}
+.btn{background:var(--cyan);border-color:var(--cyan);color:#06101a}.btn:hover{box-shadow:0 0 22px #35dfff40}
+.btn.purple{background:var(--violet);border-color:var(--violet);color:#fff}
+.smallbtn{background:#15182b;color:#e5e9ff;border-color:#343957}.smallbtn:hover{color:var(--green);border-color:var(--green)}
+.field input,.field select,.field textarea{background:#080b17;color:var(--white);border-color:#343957}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 2px #35dfff18}
+.out{background:#090d1b;border-color:#343957;color:#dce4ff}.out b{color:var(--cyan)}
+.checks label,.rule,.day{background:#0d1121;border-color:#252d49;color:#dce4ff}
+.rule b,.day b{color:var(--cyan)}.analysisbar{background:#171a31;border-color:#343957}.analysisbar span{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--green))}
+.metric{border-color:#343957;color:var(--cyan)}.chatcard{border-color:#a66bff66;background:linear-gradient(145deg,#17152d,#0b0e1b)}
+.chatwindow{background:#080b17;border-color:#343957}.chatmsg.bot{background:#15162b;border-color:#37345a;color:#f0edff}.chatmsg.user{background:var(--cyan);color:#06101a}.chatquick button{border-color:#454064;background:#15162b;color:#e5e0ff}
+.theme-picker .custom-select-trigger{border-color:#a66bff99}
+.custom-select-menu{background:#080b17;border-color:var(--violet)}
+.custom-select-option:hover,.custom-select-option:focus-visible{background:#17162d;border-color:#a66bff66}
+.custom-select-option[aria-selected="true"]{background:linear-gradient(100deg,#35dfff20,#a66bff20);border-color:#35dfff66}
+footer{border-color:#293454;color:#8f98b8}footer b{color:var(--cyan)}#toast{background:#14172b;border-color:var(--cyan);color:var(--white)}
+
+</style>
+
+<section id="rules"><div class="head"><div><div class="eyebrow">Quick reference</div><h2>Rules database</h2><p>Detailed starter guide for the main sports. Rules can change by age group, format and competition, so check the latest official rulebook.</p></div><span class="tag">FIELD GUIDE</span></div><div class="card full"><div class="field"><label>Choose sport</label><select id="ruleSport" onchange="showRules()"><option>Hockey</option><option>Cricket</option><option>Football</option><option>Badminton</option><option>Athletics</option><option>Esports</option></select></div><div class="rules" id="ruleOut"></div></div></section>
+
+
+<footer><div><b>ATHLONIX</b> // SPORTS PERFORMANCE WORKSPACE</div><div>TRAIN SMART. PLAY BOLD. KEEP IMPROVING.</div><div>SPORTS EDITION 4.0</div></footer>
+</main></div><div id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+
+// ATHLONIX Fusion theme: Phantom Purple + Cyber Blue + Neon Performance.
+// Keep the same brand palette across sports; the selected sport still controls the active module.
+const sportThemes={
+ Hockey:{cyan:'#35dfff',violet:'#a66bff',green:'#b6ff3b',glowA:'#35dfff22',glowB:'#a66bff24'},
+ Cricket:{cyan:'#35dfff',violet:'#a66bff',green:'#b6ff3b',glowA:'#35dfff22',glowB:'#a66bff24'},
+ Football:{cyan:'#35dfff',violet:'#a66bff',green:'#b6ff3b',glowA:'#35dfff22',glowB:'#a66bff24'},
+ Badminton:{cyan:'#35dfff',violet:'#a66bff',green:'#b6ff3b',glowA:'#35dfff22',glowB:'#a66bff24'},
+ Athletics:{cyan:'#35dfff',violet:'#a66bff',green:'#b6ff3b',glowA:'#35dfff22',glowB:'#a66bff24'},
+ Esports:{cyan:'#35dfff',violet:'#a66bff',green:'#b6ff3b',glowA:'#35dfff22',glowB:'#a66bff24'}
+};
+function applySportTheme(s,save=true){const t=sportThemes[s]||sportThemes.Hockey;const root=document.documentElement;root.style.setProperty('--cyan',t.cyan);root.style.setProperty('--violet',t.violet);root.style.setProperty('--green',t.green);root.style.setProperty('--glow-a',t.glowA);root.style.setProperty('--glow-b',t.glowB);const picker=$('themeSport');if(picker&&picker.value!==s)picker.value=s;if(save){try{localStorage.setItem('athlonixSportTheme',s)}catch(e){}}document.title='ATHLONIX | Fusion Performance — '+s;}
+
+const positions={Hockey:['Goalkeeper','Defender','Left Half','Right Half','Midfielder','Forward'],Cricket:['Batter','Bowler','All-rounder','Wicketkeeper','Fielder'],Football:['Goalkeeper','Defender','Midfielder','Winger','Striker'],Badminton:['Singles player','Doubles player'],Athletics:['Sprint','Middle-distance','Long-distance','Jumps','Throws'],Esports:['FPS player','MOBA player','Battle royale player','Sports / racing player','Fighting-game player','Mobile esports player']};
+const advice={Hockey:{Goalkeeper:'Practise ready stance, tracking the ball, controlled footwork and clear communication with a coach.',Defender:'Work on body positioning, scanning before receiving, controlled tackles and accurate outlet passes.','Left Half':'Scan early, receive on the move, support midfield and practise accurate diagonal passes.','Right Half':'Build quick scanning habits, passing under pressure and balanced transitions.','Midfielder':'Scan before receiving, take a first touch into space, combine with short passes and recover position.','Forward':'Practise timed leads, first touch, finishing accuracy and controlled direction changes.'},Cricket:{Batter:'Practise a balanced stance, watching the ball, soft hands and shot selection against varied deliveries.',Bowler:'Focus on repeatable action, target accuracy, controlled run-up and safe workload with a coach.','All-rounder':'Plan short skill blocks for batting and bowling, with recovery between harder efforts.',Wicketkeeper:'Practise ready position, footwork, soft hands and clear communication.',Fielder:'Train catching, first-step reactions, ground-ball pickup and accurate throws.'},Football:{Goalkeeper:'Practise set position, footwork, communication and safe catching.',Defender:'Work on body shape, scanning, approach timing and simple passes under pressure.',Midfielder:'Scan over both shoulders, open your body to receive and pass then move into space.',Winger:'Practise first touch at speed, direction changes, crossing accuracy and tracking back.',Striker:'Work on movement before receiving, finishing with both feet and quick decisions.'},Badminton:{'Singles player':'Build efficient split steps, recovery to base, shot placement and rally patience.','Doubles player':'Practise serve returns, coordinated movement, communication and quick racket preparation.'},Athletics:{Sprint:'Focus on coached start mechanics, relaxed arm action, gradual acceleration and full recovery.', 'Middle-distance':'Practise even pacing, relaxed form and controlled intervals with adequate recovery.','Long-distance':'Build consistency gradually, keep most runs comfortable and include recovery days.',Jumps:'Use supervised approach-run drills, take-off rhythm and safe landing practice.',Throws:'Prioritise coached technique, safe throwing zones, warm-ups and controlled progression.'}};
+const rules={
+Hockey:[
+['Team & positions','Outdoor field hockey normally has 11 players per team on the pitch, including a goalkeeper. Teams may substitute players under the competition rules. Indoor and junior formats can differ.'],
+['Stick & ball','Field players should play the ball with the flat side of the stick. Do not use the rounded side or play the ball with the feet to gain an advantage. Goalkeepers have special privileges inside their defending circle.'],
+['Scoring circle','A goal generally counts only when an attacker plays the ball from inside the shooting circle and it then crosses the goal line between the posts and under the crossbar. A shot from outside the circle does not count as a goal unless another attacker legally plays it inside the circle first.'],
+['Free hits','Free hits are awarded for many offences. Opponents must keep the required distance, and the ball must be stationary before the hit. The exact restart position and distance depend on the offence and current rules.'],
+['Foot & obstruction','Accidental contact is judged under the rules, but deliberately stopping or controlling the ball with the foot can be penalised. Do not shield the ball with your body or stick in a way that prevents a legitimate playing opportunity.'],
+['Penalty corners','A penalty corner is awarded for specified defending offences in the circle and some deliberate offences in the defending half. Attackers and defenders must take their positions as required; follow the umpire’s instructions.'],
+['Penalty strokes','A penalty stroke may be awarded for certain offences that prevent a probable goal. It is taken from the designated spot under the umpire’s control.'],
+['Safety & cards','Dangerous play, reckless stick use, body contact and playing the ball dangerously can be penalised. Umpires may issue green, yellow or red cards. Wear suitable protective equipment and never swing the stick near another player.']],
+Cricket:[
+['Team & innings','A standard team has 11 players. Match formats set the number of overs and innings; follow the competition’s playing conditions.'],
+['Overs & legal balls','An over normally contains six valid deliveries. Wides and no-balls do not count as valid balls in the over, and they usually add penalty runs. Specific formats may have extra restrictions.'],
+['Scoring runs','Batters score by running between the wickets or hitting boundaries. A boundary normally scores four if the ball reaches the boundary after touching the ground, or six if it clears the boundary without bouncing. Overthrows and extras can change the total.'],
+['Dismissals','Common dismissals include bowled, caught, leg before wicket (LBW), run out, stumped and hit wicket. Each dismissal has conditions; ask the umpire if unsure.'],
+['Bowling rules','The bowler must follow the legal delivery action and crease rules. No-balls can be called for overstepping or other illegal deliveries; wides are called when a ball is too far from the batter to play a normal shot.'],
+['Batters & crease','Batters should ground their bat or body behind the popping crease to make their ground. A run out can occur if the wicket is fairly broken while a batter is out of their ground and the ball is in play.'],
+['Fielding & safety','Do not distract or obstruct batters unfairly. Use protective gear where appropriate, keep a safe distance from the bat, and do not throw equipment in frustration.'],
+['Spirit of cricket','Respect the umpires, opponents and teammates. Accept decisions calmly and follow the tournament’s rules for reviews, time limits and player conduct.']],
+Football:[
+['Team & match length','A standard outdoor team has up to 11 players, including a goalkeeper. A match is normally two halves of 45 minutes, but youth games and competitions may use different durations.'],
+['Ball in & out of play','The ball is out when it wholly crosses a touchline or goal line, on the ground or in the air, or when the referee stops play. Otherwise it remains in play.'],
+['Kick-off & restarts','Kick-off starts each half and restarts play after a goal. Throw-ins, goal kicks, corner kicks, free kicks and penalty kicks are used for different situations. Opponents must respect the required distance.'],
+['Offside','Being in an offside position alone is not an offence. A player may be penalised if, when a teammate plays the ball, they are in an offside position and become involved in active play. There is no offside directly from a goal kick, throw-in or corner kick.'],
+['Fouls & free kicks','Kicking, tripping, pushing, holding, charging unfairly or handling the ball illegally can result in a free kick or penalty kick. The referee considers the nature and location of the offence.'],
+['Cards','A yellow card is a caution; a red card sends a player off. Serious foul play, violent conduct and certain other offences may lead to a red card. A sent-off player cannot be replaced in standard adult rules.'],
+['Goalkeeper','The goalkeeper may use hands within their own penalty area, subject to the Laws. Restrictions apply when a teammate deliberately kicks the ball to them or on certain restarts.'],
+['Fair play & safety','Play the ball, not the opponent. Follow the referee’s decisions, avoid dangerous tackles, wear suitable footwear and shin guards, and stop if equipment or an injury makes play unsafe.']],
+Badminton:[
+['Match & scoring','A match is usually best of three games. A game is normally played to 21 points, with a two-point lead needed at 20-all; at 29-all, the side scoring the 30th point wins.'],
+['Rally scoring','A point is scored on every rally, regardless of which side served. The side winning a rally serves next.'],
+['Serving','The server and receiver stand in diagonally opposite service courts. The shuttle must be struck under the current service-height and racket rules, and both feet must remain properly placed until the serve is delivered.'],
+['Singles & doubles','Singles uses the narrow side boundaries and full length. Doubles uses the wider side boundaries during rallies; service court boundaries differ for doubles serves. Know the lines for your event.'],
+['Faults','A fault can occur if the shuttle lands out, fails to cross the net, touches a player or ceiling, a player touches the net, or the shuttle is hit twice by the same side.'],
+['In or out','A shuttle landing on any part of a boundary line is in. If it lands outside the relevant lines, it is out. Call lines honestly and ask the umpire when one is present.'],
+['Let & conduct','A let may be called to replay a rally in certain interruptions or unexpected situations. Do not distract an opponent deliberately, delay play unfairly or argue abusively with officials.'],
+['Safety & equipment','Warm up, use court shoes, keep rackets under control and check the court for hazards. Stop if you feel pain or dizziness.']],
+Athletics:[
+['Event rules vary','Athletics includes track races, road events, jumps and throws. Each event has its own rules, measurements and competition procedures; follow the event official’s instructions.'],
+['Starts & false starts','Sprint events use a starting signal and designated starting positions. A false start may lead to disqualification under the applicable event rules; younger categories may use different procedures.'],
+['Lanes & obstruction','In lane races, stay within your lane as required. In longer races, do not deliberately obstruct, jostle or impede another runner. Follow instructions about break lines and track merging.'],
+['Finishing','A track race is decided when the torso reaches the vertical plane of the finish line. Do not slow down before the line; continue safely through the finish area.'],
+['Jumps','Long jump and triple jump attempts must follow take-off board and landing-area rules. High jump and pole vault attempts must meet event-specific clearance rules. Officials determine valid and failed attempts.'],
+['Throws','Shot put, discus, javelin and hammer must be thrown from the designated area into the marked sector. Stay inside the circle or runway rules, and wait for officials before retrieving equipment.'],
+['Attempts & fouls','Stepping over a boundary or committing a prohibited take-off/throwing action can make an attempt a foul. Athletes must follow the number and order of attempts set by the event.'],
+['Safety & sportsmanship','Warm up properly, use the correct event equipment, never enter a throwing sector while implements are in use, and respect officials and competitors. Stop for pain or unusual symptoms.']],
+Esports:[
+['Game-specific rules','Every title has its own rules for modes, maps, rounds, characters, equipment and win conditions. Read the current in-game rules and tournament rulebook before competing.'],
+['Fair play & cheating','Do not use cheats, scripts, macros, exploits, bots, unauthorised overlays or outside assistance. Account sharing and boosting may also be prohibited. Penalties can include match loss or disqualification.'],
+['Teamwork & communication','Use clear, relevant callouts and respect teammates. Do not harass, threaten, use discriminatory language or intentionally sabotage a match. Follow voice/text chat rules.'],
+['Pauses & disconnects','Only pause or report a disconnect as allowed by the tournament. Do not intentionally disconnect to avoid a loss. Follow admin instructions for reconnects and technical issues.'],
+['Competitive integrity','Do not collude, share confidential strategies with opponents, manipulate results or use prohibited information. Report suspected rule violations through the official process.'],
+['Equipment & settings','Use only permitted devices, controllers, software and settings. Check tournament rules for peripherals, sensitivity settings, mods and performance tools.'],
+['Match conduct','Be ready on time, confirm the correct lobby/server and follow map or side-selection procedures. Do not exploit bugs unless the rules explicitly permit them.'],
+['Healthy play','Take regular breaks, protect sleep, keep a comfortable posture and balance gaming with school, movement and other activities. Stop if your hands, eyes or body feel uncomfortable.']]
+};
+function toast(s){$('toast').textContent=s;$('toast').style.display='block';clearTimeout(window.tt);window.tt=setTimeout(()=>$('toast').style.display='none',2300)}
+$('menu').setAttribute('aria-label','Open navigation menu');$('menu').setAttribute('aria-expanded','false');$('menu').onclick=()=>{const open=$('sidebar').classList.toggle('open');document.body.classList.toggle('menu-open',open);$('menu').setAttribute('aria-expanded',String(open));$('menu').setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu')};document.addEventListener('click',e=>{if(document.body.classList.contains('menu-open')&&e.target===document.body){$('sidebar').classList.remove('open');document.body.classList.remove('menu-open');$('menu').setAttribute('aria-expanded','false')}});
+let activePageId=null;
+function switchPage(id,updateHash=true){
+ const target=document.getElementById(id);if(!target||!target.matches('main>section'))return;
+ // Original behaviour: keep all sections in the document and scroll vertically to the chosen section.
+ document.querySelectorAll('main>section').forEach(sec=>{sec.classList.remove('page-hidden','page-enter','page-exit');sec.removeAttribute('aria-hidden')});
+ document.querySelectorAll('.nav').forEach(n=>{const active=n.getAttribute('href')==='#'+id;n.classList.toggle('active',active);if(active)n.setAttribute('aria-current','page');else n.removeAttribute('aria-current')});
+ const footer=document.querySelector('main>footer');if(footer)footer.style.display='flex';
+ $('sidebar').classList.remove('open');document.body.classList.remove('menu-open');if($('menu')){$('menu').setAttribute('aria-expanded','false');$('menu').setAttribute('aria-label','Open navigation menu')}
+ activePageId=id;
+ if(updateHash&&location.hash!=='#'+id)history.pushState({page:id},'','#'+id);
+ target.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href').slice(1);const target=document.getElementById(id);if(target&&target.matches('main>section')){e.preventDefault();switchPage(id)}}));
+window.addEventListener('popstate',()=>{const id=(location.hash||'#home').slice(1);const target=document.getElementById(id);if(target&&target.matches('main>section'))switchPage(id,false)});
+// Keep every section visible on load; honour a direct section link if present.
+document.querySelectorAll('main>section').forEach(sec=>{sec.classList.remove('page-hidden','page-enter','page-exit');sec.removeAttribute('aria-hidden')});
+const initialPage=(location.hash||'#home').slice(1);if(initialPage!=='home'&&document.getElementById(initialPage)?.matches('main>section'))setTimeout(()=>document.getElementById(initialPage)?.scrollIntoView({behavior:'auto',block:'start'}),0);
+function selectSport(s){['trackSport','posSport','coachSport','schedSport'].forEach(id=>$(id).value=s);applySportTheme(s);updatePositions();switchPage('tracker');toast(s+' module + theme selected')}
+function updatePositions(){let s=$('posSport').value;$('position').innerHTML=positions[s].map(p=>`<option>${p}</option>`).join('')}
+function positionTips(){let s=$('posSport').value,p=$('position').value;$('posOutput').innerHTML=`<b>${s.toUpperCase()} / ${p.toUpperCase()}</b>\n${advice[s][p]}\n\n<b>Practice structure</b>\n• Warm up for 8–10 minutes.\n• Choose 1–2 quality drills and focus on technique.\n• Cool down and note one thing to improve.`}
+function sessions(){try{return JSON.parse(localStorage.getItem('athlonixSessions')||'[]')}catch(e){return []}}
+function renderSessions(){let a=sessions();$('count').textContent=String(a.length).padStart(2,'0');$('minutes').textContent=String(a.reduce((n,s)=>n+s.duration,0)).padStart(3,'0');$('history').textContent=a.length?a.slice(-5).reverse().map(s=>`${s.date} | ${s.sport} · ${s.type} · ${s.duration} min · effort ${s.effort}/10${s.notes?'\n'+s.notes:''}`).join('\n\n'):'No sessions logged yet.'}
+function exportSessions(){
+ const rows=sessions();
+ if(!rows.length){toast('Log a session before exporting');return}
+ const cols=['date','sport','duration','type','effort','notes'];
+ const cell=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+ const csv=[cols.join(','),...rows.map(r=>cols.map(c=>cell(r[c])).join(','))].join('\r\n');
+ const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='athlonix-training-log.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('Training CSV exported');
+}
+function clearSessions(){
+ if(!sessions().length){toast('There is no saved history to clear');return}
+ if(!confirm('Clear all ATHLONIX training sessions saved in this browser? This cannot be undone.'))return;
+ localStorage.removeItem('athlonixSessions');renderSessions();toast('Training history cleared');
+}
+$('sessionForm').addEventListener('submit',e=>{e.preventDefault();let a=sessions();a.push({date:new Date().toLocaleDateString(),sport:$('trackSport').value,duration:+$('duration').value,type:$('type').value,effort:$('effort').value,notes:$('notes').value.trim()});try{localStorage.setItem('athlonixSessions',JSON.stringify(a));$('notes').value='';renderSessions();toast('Session saved on this device')}catch(err){toast('Could not save: browser storage is unavailable')}});
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const coachPlans={
+'Technique':'Choose one skill detail, practise slowly with control, then add realistic pressure only when the movement feels consistent. Review balance, timing and follow-through.',
+'Speed & agility':'Warm up first. Practise a few short, high-quality movements with full recovery between efforts. Keep control and stop if you feel pain or unusual discomfort.',
+'Decision-making':'Practise scan → decide → act. Ask a partner or coach to vary the situation, then explain why you chose that option.',
+'Fitness & recovery':'Build fitness gradually with age-appropriate, supervised activity. Balance practice with sleep, food, hydration and rest days.',
+'Confidence & focus':'Choose one controllable goal before a drill. Use a calm breath and a short cue word; reset after mistakes instead of dwelling on them.'};
+const sportTips={
+'Hockey':'Scan over both shoulders before receiving, open your body, take the first touch into space and practise accurate push passes with both sides where appropriate.',
+'Cricket':'Use a balanced ready position, watch the ball closely and practise one skill at a time. Batters can work on soft hands; bowlers should prioritise repeatable technique and a sensible workload.',
+'Football':'Scan before the ball arrives, open your body to the field and pass then move into space. Practise first touch and short passing with both feet.',
+'Badminton':'Use a split step, recover towards base after each shot and practise placement before adding speed. Keep the racket ready and communicate with your doubles partner.',
+'Athletics':'Focus on relaxed technique, gradual progression and full recovery between harder efforts. Get a qualified coach to check event-specific mechanics.',
+'Esports':'Set up comfortably, use short focused practice blocks and review one decision at a time. Track mistakes and decision quality rather than playing for long hours.'};
+function localCoachPlan(s,f,q){
+ const text=(q||'').toLowerCase();
+ const injury=/pain|injur|hurt|swollen|dizz|breathless|chest pain|sharp pain|sprain/.test(text);
+ if(injury) return `ATHLONIX SMART COACH // ${s.toUpperCase()}\n\nSAFETY FIRST\nStop the session if you have pain or feel unwell. Tell a parent/guardian and your qualified coach; seek medical advice when needed. I cannot diagnose an injury. Do not try to train through pain.\n\nWhen you are well, return gradually with adult/coach guidance.`;
+ const intent= /weak|struggle|bad at|problem|mistake|improv|better|weakness/.test(text)?'improve':/match|game|tactic|opponent|pressure|decision|when should|strategy/.test(text)?'game':/nervous|confidence|focus|fear|stress|motivat/.test(text)?'mindset':/fit|stamina|endurance|tired|speed|agility|strength/.test(text)?'fitness':/drill|exercise|practice|practise|routine|workout/.test(text)?'drills':/position|role|left half|midfield|forward|defender|goalkeeper|keeper/.test(text)?'role':'skill';
+ const common={
+  Hockey:{skill:'Scan both shoulders before receiving, open your body to the next pass and move after releasing the ball.',drills:['Wall/partner passing: 3 sets of 8 controlled passes, alternating target sides.','Receive while moving into a cone gate, then pass to a target; start without a defender.','Add a passive defender only when control stays consistent.'],measure:'Count accurate passes out of 10 and how often you scanned before receiving.',role:'As a half/midfielder, offer a clear passing angle, scan early, receive on the move and support again after passing.'},
+  Cricket:{skill:'Choose one batting, bowling or fielding skill per session and keep the movement balanced and repeatable.',drills:['Shadow the chosen movement slowly for 2 short sets.','Practise 8–12 controlled repetitions with a coach/partner and one clear cue.','Add a realistic feed or decision only when the basic movement is consistent.'],measure:'Record controlled repetitions and the one technical cue you followed; bowling workload should be coach-supervised.',role:'Stay ready between deliveries, communicate clearly and choose a role-specific cue rather than trying to fix everything at once.'},
+  Football:{skill:'Scan before the ball arrives, receive with your body open when possible, and pass then move into space.',drills:['Pass against a wall or with a partner for 3 sets of 8.','Receive across your body and pass to alternating targets.','Add a passive defender or one-touch limit only after control improves.'],measure:'Count accurate passes out of 10 and successful first touches out of 10.',role:'Keep checking shoulders, give the ball carrier a clear angle and move immediately after passing.'},
+  Badminton:{skill:'Use a ready position and split step, move under control, then recover towards base after each shot.',drills:['Shadow movement to two corners, returning to base each time.','Practise controlled feeds to one corner before adding a second corner.','Add a multi-shuttle or rally challenge with quality before speed.'],measure:'Count balanced recoveries out of 10 and whether you returned to base after each movement.',role:'Watch the opponent and shuttle, prepare early and recover to a useful base position after the shot.'},
+  Athletics:{skill:'Prioritise relaxed, repeatable technique and practise the phase relevant to your event with a qualified coach.',drills:['Warm up with an age-appropriate routine approved by your coach.','Do a small set of technically controlled repetitions with full recovery.','Review one short recording from the same camera angle; stop when form deteriorates.'],measure:'Track consistency of the chosen technique cue across repetitions; use coach-approved timing or distance measures where appropriate.',role:'Focus on one event-specific cue at a time; do not chase speed or volume at the expense of technique and recovery.'},
+  Esports:{skill:'Review decisions, information available and teamwork rather than judging a play only by its outcome.',drills:['Review one short clip and pause just before a key decision.','Write the information you had, your choice and one alternative.','Play a short focused block, then review one repeated mistake and take a break.'],measure:'Track decision quality, avoidable errors and team communication across a few sessions; take regular breaks.',role:'Communicate the plan briefly, share useful information and reset after a mistake without blaming teammates.'}
+ };
+ const d=common[s]||common.Hockey;
+ let focusAdvice=coachPlans[f]||coachPlans.Technique;
+ let answer='';
+ if(intent==='mindset') answer='MENTAL GAME\n1. Pick one controllable goal for the session.\n2. Use a short cue word such as “scan”, “balance” or “recover”.\n3. After a mistake, take one calm breath and focus on the next action. Measure effort and decisions, not just the result.';
+ else if(intent==='fitness') answer='FITNESS & RECOVERY\nBuild activity gradually with a qualified coach and age-appropriate sessions. Warm up, take recovery between hard efforts, hydrate, eat regularly and get enough sleep. Do not add extra training if you are unusually tired or sore.';
+ else if(intent==='game') answer='GAME / DECISION REVIEW\nBefore the action: scan the space and available options. During it: choose the simplest useful action you can execute well. After it: ask what information you noticed and what you would try next time. Review one decision at a time.';
+ else if(intent==='role') answer='ROLE-SPECIFIC PRIORITY\n'+d.role;
+ else if(intent==='improve') answer='FIND THE BOTTLENECK\nDo not change everything at once. Identify whether the main issue is technique, timing, awareness or consistency. Practise the matching drill below, record a simple result, then adjust one thing next session.';
+ else if(intent==='drills') answer='PRACTICE DRILLS\n'+d.drills.map((x,i)=>(i+1)+'. '+x).join('\n');
+ else answer='TECHNIQUE PRIORITY\n'+d.skill;
+ const plan=`SESSION PLAN (about 15–20 minutes)\n1. 3–5 min: comfortable warm-up.\n2. 6–8 min: practise the first drill with control.\n3. 4–5 min: repeat with a small, appropriate challenge.\n4. 1–2 min: write down what worked and what to try next time.\n\nPROGRESS CHECK\n${d.measure}\nCompare similar sessions, not different drills or camera angles. Increase difficulty only when the current level is controlled.`;
+ const extra=s==='Hockey'&&/left half|midfield|midfielder|passing|pass under pressure|scan/.test(text)?'\n\nHALF / MIDFIELD TIP\nCheck both shoulders before the ball arrives, show a clear passing option, receive on the move and support again after passing. Start without pressure, then add a passive defender.':s==='Esports'&&/aim|crosshair|rank|rotation|map|mechanic|gameplay/.test(text)?'\n\nGAME REVIEW\nReview one short clip: pause before a key decision, note the information available, write down your choice and one alternative, then compare the reasoning—not only the outcome.':s==='Badminton'&&/serve|smash|footwork|rally/.test(text)?'\n\nSKILL TIP\nPractise placement and controlled recovery before increasing power or pace.':s==='Cricket'&&/bat|bow|bowl|catch|wicket/.test(text)?'\n\nSKILL TIP\nChoose one batting, bowling or fielding target. Ask your coach to check technique and manage bowling workload.':'';
+ return `ATHLONIX SMART COACH // ${s.toUpperCase()}\nFocus area: ${f}\nQuestion: ${q||'How can I improve?'}\n\n${answer}${extra}\n\nFOCUS AREA GUIDANCE\n${focusAdvice}\n\n${plan}\n\nCOACHING NOTE\nThis is an upgraded on-device, rule-based coaching engine: it matches question intent, sport and focus area to a structured plan. It is not a trained generative AI model, and it cannot observe your real performance unless you run video analysis. Use advice as practice ideas and ask your qualified coach to verify sport-specific technique.`;
+}
+function generateStrategy(){
+ const sport=$('strategySport').value, situation=$('strategySituation').value, strength=$('strategyStrength').value, opponent=$('strategyOpponent').value, notes=$('strategyNotes').value.trim();
+ const base={
+  Hockey:{shape:'Keep clear passing triangles, maintain width and give the player on the ball at least two safe options.',attack:'Scan before receiving, use quick controlled passes and move immediately to create the next option.',defend:'Stay connected between lines, angle the opponent away from the middle and recover goal-side after a turnover.',roles:'Defenders: communicate and offer a safe outlet. Halves/midfielders: scan early and connect defence to attack. Forwards: make purposeful leads and press together when the team is ready.',review:'Count controlled exits, successful passes into space and recoveries after losing possession.'},
+  Football:{shape:'Keep useful width and depth, with nearby support options around the ball.',attack:'Scan before receiving, play into space when it is safe, then move to support again.',defend:'Protect the central area, stay compact and press together rather than sending one player alone.',roles:'Defenders: communicate and offer safe outlets. Midfielders: show passing angles and track runners. Forwards: stretch the defence and trigger the press together.',review:'Review turnovers, forward passes that reach a teammate and how quickly the team regains shape.'},
+  Cricket:{shape:'Agree on roles and field placements with the captain and coach based on the batter, conditions and format.',attack:'Batters: choose options based on line, length and field gaps; run only when the call is clear.',defend:'Bowl to a planned area with a safe, repeatable action; fielders back up throws and communicate early.',roles:'Captain: set a simple plan. Bowler: commit to one target and variation at a time. Fielders: know the boundary protection and backing-up responsibilities. Batters: communicate clearly between wickets.',review:'Track dot balls, extras, safe running decisions and whether the intended bowling area was hit.'},
+  Badminton:{shape:'Recover to a useful base position and keep the next shot options open.',attack:'Move the opponent around with controlled placement first; attack only when balance and shuttle position allow.',defend:'Use a ready racket, split step and controlled lift/clear when under pressure; avoid rushed low-percentage replies.',roles:'Singles: create space and recover after each shot. Doubles: agree who takes the middle, call clearly and avoid both players moving to the same shuttle.',review:'Track unforced errors, balanced recoveries and whether shot choice matched your position.'},
+  Athletics:{shape:'Plan the event around a controlled start, repeatable technique and a clear pacing or phase goal.',attack:'Commit to one event-specific cue and execute your own race plan rather than reacting to every competitor move.',defend:'If form or coordination deteriorates, prioritise control and follow your coach’s pacing and safety guidance.',roles:'Agree on the event plan, warm-up, pacing cues and post-event review with your coach; do not add extra maximal efforts just to catch up.',review:'Use coach-approved timing, distance or split data and note whether the technique cue stayed consistent.'},
+  Esports:{shape:'Agree on roles, information calls and a simple win condition before the round or match.',attack:'Play around available information and team utility; take coordinated actions rather than isolated fights.',defend:'Trade safely, protect key objectives and avoid chasing an opponent into an unknown area without team information.',roles:'Assign an initiator/entry, support, information and objective responsibility where the game supports those roles. Keep callouts short and specific.',review:'Review one key decision: information available, chosen action, team coordination and one alternative.'}
+ };
+ const b=base[sport]||base.Hockey;
+ const situationText={balanced:'Start with a low-risk plan: learn the opponent’s pattern, communicate early and avoid forcing difficult plays before the team settles.',leading:'Protect the structure without becoming passive. Choose safer options, keep communication clear and avoid unnecessary risks; continue to take good opportunities.',trailing:'Stay composed and increase initiative in controlled steps. Create more support options, but avoid abandoning all defensive balance or forcing every play.',press:'Use quick communication, scan early and find the free player or space behind the press. If the safe option is unavailable, reset rather than forcing a pass.',defend:'Prioritise compact spacing, clear responsibilities and patience. Protect the most dangerous space and counter only when there is a clear, supported opportunity.',final:'Simplify decisions and confirm roles before each restart or key play. Manage the clock or objective within the rules, communicate calmly and avoid rushed individual actions.'}[situation];
+ const strengthText={passing:'Build around short, reliable combinations and move after passing to create a second option.',speed:'Look for safe moments to transition quickly, with nearby support and cover behind the attack.',defence:'Keep the team connected, communicate assignments and use controlled transitions when possession changes.',control:'Keep possession purposeful: move the opponent, create space and progress when a clear opening appears.',individual:'Use individual skill to create an advantage, then connect it to a team action instead of trying to beat everyone alone.'}[strength];
+ const opponentText={unknown:'Use the opening phase to observe their strongest player, preferred side and response after losing possession.',press:'Stay calm, scan early and use a safe outlet or space behind pressure; avoid slow touches in crowded areas.',compact:'Move the opponent side to side, be patient and use width or changes of angle to create openings.',fast:'Keep sensible cover behind attacks and recover quickly after losing possession; do not let everyone commit forward at once.',possession:'Stay organised, communicate and use coordinated pressure only when teammates can cover the next pass.'}[opponent];
+ const roleNote= sport==='Cricket'?'Confirm field settings and bowling plans with the captain/coach and adapt to batter, pitch and match format.':sport==='Athletics'?'An individual event is not a team tactic: confirm pacing, phases and effort targets with your coach.':sport==='Esports'?'Adapt role names and objective timings to the exact game and map; this tool does not read live game telemetry.':'Agree on simple triggers with teammates—for example, when to press, when to drop back and who covers the space left behind.';
+ $('strategyOut').textContent=`ATHLONIX STRATEGY BRIEF // ${sport.toUpperCase()}
+
+1. MAIN PLAN
+${b.shape}
+
+2. MATCH-SITUATION PRIORITY
+${situationText}
+
+3. USE YOUR TEAM STRENGTH
+${strengthText}
+
+4. ADAPT TO THE OPPONENT
+${opponentText}
+
+5. SPORT-SPECIFIC EXECUTION
+ATTACK / PERFORMANCE: ${b.attack}
+DEFENCE / CONTROL: ${b.defend}
+ROLE CLARITY: ${b.roles}
+
+6. TEAM AGREEMENT
+${roleNote}
+
+7. REVIEW AFTER A SHORT PHASE
+${b.review}
+Ask: What worked? What did the opponent change? What one adjustment should we try next?${notes?'\n\nYOUR CONTEXT\n'+notes+'\nDiscuss this detail with your coach/team and decide whether it changes the plan.':''}
+
+Reminder: this is a structured tactical suggestion, not a live opponent analysis or a guarantee of success. Follow your coach, official rules and safe play.`
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+function isRelevantSportsInput(sport, value){
+ const text=(value||'').toLowerCase().trim();
+ if(text.length<4) return false;
+ // Accept sport, training, tactics, match, performance and common Hinglish terms.
+ const common=/\b(sport|sports|match|game|team|player|opponent|coach|training|practice|practise|drill|skill|technique|pass|passing|shoot|shooting|defen[cs]e|attack|attacking|position|formation|strategy|tactic|tactical|score|goal|ball|field|court|pitch|run|speed|fitness|stamina|reaction|focus|decision|improve|weak|problem|mistake|performance|video|movement|hockey|cricket|football|badminton|athletics|esport|left half|midfielder|forward|defender|goalkeeper|bowling|batting|serve|smash|footwork|press|pressure|possession|counter|defend|fielding|aim|map|rotation|teamwork|khel|khiladi|match mein|team mein|pass kar|defence|attack kar|practice kar|sudhar|behtar|kamzor|galti|strategy bata|kaise khelu|kaise khel|meri team|opponent|maidan|goal|ball|stick|stamina|tez|positioning)\b/.test(text);
+ const sportWords={Hockey:/hockey|stick|dribble|left half|midfield|circle|penalty corner|pass|ball|press|sideline/,Cricket:/cricket|bat|batter|bowler|bowling|wicket|fielder|run|pitch|over|delivery/,Football:/football|soccer|goal|striker|winger|midfielder|defender|keeper|pass|dribble|pitch/,Badminton:/badminton|shuttle|racket|rally|smash|serve|court|clear|drop shot|footwork/,Athletics:/athletics|sprint|race|run|stride|jump|throw|pace|split|start|finish/,Esports:/esports|gameplay|aim|crosshair|map|rotation|rank|objective|cooldown|team fight|replay|round/};
+ return common || (sportWords[sport]||/sports|game|training/).test(text);
 }
+async function askCoach(){
+ const s=$('coachSport').value,f=$('coachFocus').value,q=$('question').value.trim(),out=$('coachOut');
+ if(!q){out.textContent='Please type a question so your coach knows what you want to improve.';return}
+ if(!isRelevantSportsInput(s,q)){out.textContent=`I can only answer sports-training questions here. Your message does not clearly describe a ${s} skill, match situation, tactic, training goal or performance problem. Please add details such as your position, what happened, what you want to improve and any limits you are facing. I will not invent an answer from unrelated text.`;return}
+ out.textContent='Checking your question against the selected sport and focus…';
+ // No API key or cloud AI: validate relevance before using local sport-specific rules.
+ out.textContent=localCoachPlan(s,f,q);
+}
+$('videoFile').addEventListener('change',e=>{let f=e.target.files[0];latestPoseReport=null;$('confirmSportClip').checked=false;$('videoOut').textContent='New clip selected. Confirm that it shows the chosen sport and skill, then run analysis. This tool measures body pose; it does not identify the video topic.';$('videoChatStatus').textContent='Status: new clip selected — run pose analysis for fresh measurements.';drawPoseTrend([]);if(!f)return;if(!f.type.startsWith('video/')){toast('Choose a video file');e.target.value='';return}if(f.size>200*1024*1024){$('videoOut').textContent='This clip is larger than 200 MB. Choose a shorter or compressed video to reduce memory use and avoid slowing your device.';e.target.value='';return}let v=$('preview');if(v.dataset.url)URL.revokeObjectURL(v.dataset.url);v.dataset.url=URL.createObjectURL(f);v.src=v.dataset.url;v.style.display='block';v.load();toast('Video preview ready in this browser')});
+let latestPoseReport=null;
+function addVideoChatMessage(text,who='bot'){
+ const win=$('videoChat');const el=document.createElement('div');el.className='chatmsg '+who;el.textContent=text;win.appendChild(el);win.scrollTop=win.scrollHeight;
+}
+function quickVideoChat(q){$('videoChatInput').value=q;sendVideoChat(q)}
+function videoCoachReply(question){
+ const q=question.toLowerCase();
+ if(!latestPoseReport) return 'I do not have measurements for a clip yet. Choose a video and run body-pose analysis. This no-key tool measures visible body landmarks; it does not understand the video content.';
+ const r=latestPoseReport,fmt=n=>Number.isFinite(n)?n.toFixed(1):'not measurable';
+ const lines=[`I analysed sampled body-pose landmarks in your clip (${r.frames} sampled frames; a person was detected in ${r.detected}).`,`Average knee angles: left ${fmt(r.leftKnee)}°, right ${fmt(r.rightKnee)}°.`,`Average elbow angles: left ${fmt(r.leftElbow)}°, right ${fmt(r.rightElbow)}°.`,`Torso-orientation variation: ${fmt(r.leanVariation)}°.`];
+ if(/drill|exercise|practice|practise|improve|first|next|strategy|tactic/.test(q)){
+   return lines.join('\n')+'\n\nImportant: these measurements do not tell me what sport action is happening, so I cannot honestly choose a drill or strategy based on this video. I can give general drills for the sport you select, but they would not be video-verified. Tell a coach what action the clip shows and ask them to confirm the technique.';
+ }
+ return lines.join('\n')+'\n\nThese are estimated 2D measurements only—not a sport/action identification or technique grade. Camera angle, occlusion and sampling can affect them. I cannot verify whether the video contains the selected sport or skill, or identify passes, shots, goals, equipment contact, tactics or mistakes. A person in an unrelated video can still produce these measurements.';
+}
+function formatTimecode(seconds){const t=Math.max(0,Math.floor(Number(seconds)||0));return `${String(Math.floor(t/60)).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`;}
+async function runLocalVideoUnderstanding(){
+ const out=$('visionVideoOut'),btn=$('runVisionBtn');
+ if(!$('videoFile').files[0]){out.textContent='Choose a video first.';return;}
+ if($('videoSport').value==='Esports'){out.textContent='This local pose model analyses people, not gameplay. Use Gameplay Video Review for visual-change timestamps; it does not understand game strategy.';return;}
+ if(btn.disabled)return;
+ btn.disabled=true;btn.textContent='Building local timeline…';
+ try{
+  // Always refresh measurements for the selected clip; no network request sends video frames.
+  await reviewVideo();
+  const r=latestPoseReport;
+  if(!r){out.textContent='No reliable local pose report was produced, so no coaching timeline was created. Try a clear clip with one person and the full body visible.';return;}
+  const tl=$('aiEventTimeline');tl.replaceChildren();
+  const samples=(r.samples||[]).filter(x=>Number.isFinite(x.time));
+  if(samples.length<3){tl.innerHTML='<div class="day"><b>NOT ENOUGH DATA</b><span>Too few usable body-pose samples to create a timeline.</span></div>';out.textContent='Pose measurements were insufficient to create a local movement timeline.';return;}
+  const cues=[];
+  const meanFinite=vals=>{const a=vals.filter(Number.isFinite);return a.length?a.reduce((x,y)=>x+y,0)/a.length:NaN;};
+  for(let i=1;i<samples.length;i++){
+   const a=samples[i-1],b=samples[i];
+   const changes=[['left knee angle',a.lk,b.lk],['right knee angle',a.rk,b.rk],['left elbow angle',a.le,b.le],['right elbow angle',a.re,b.re],['torso orientation',a.lean,b.lean]]
+    .map(([label,x,y])=>({label,delta:Math.abs(y-x)})).filter(x=>Number.isFinite(x.delta)).sort((x,y)=>y.delta-x.delta);
+   if(changes[0] && changes[0].delta>=12){cues.push({time:b.time,desc:`Noticeable measured change in ${changes[0].label} (${changes[0].delta.toFixed(1)}° between samples). Replay this moment and check whether it matches the intended movement phase.`});}
+  }
+  // Keep a small number of evenly spread, evidence-linked cues rather than inventing events.
+  const unique=[];for(const cue of cues){if(!unique.some(x=>Math.abs(x.time-cue.time)<1.0))unique.push(cue);}
+  const selected=unique.slice(0,8);
+  if(selected.length){for(const ev of selected){const row=document.createElement('div');row.className='day';const time=document.createElement('b');time.textContent=formatTimecode(ev.time);const desc=document.createElement('span');desc.textContent=ev.desc;row.append(time,desc);tl.append(row);}}
+  else{const row=document.createElement('div');row.className='day';const time=document.createElement('b');time.textContent='NO LARGE CHANGE';const desc=document.createElement('span');desc.textContent='No large joint-angle or torso-orientation change crossed the local threshold in these samples. This does not mean the technique is correct or that nothing happened.';row.append(time,desc);tl.append(row);}
+  const objectLine=r.objectDetectorAvailable?(r.objectSummary?.length?` Optional local object detections: ${r.objectSummary.map(o=>`${o.label} in ${o.frames} frames`).join(', ')}.`:' The object detector did not confidently label supported objects.'):' The optional object detector was unavailable.';
+  out.textContent=`LOCAL MOVEMENT TIMELINE · ${r.sport} / ${r.skill}\n\nProcessed ${r.frames} sampled frames in this browser; usable pose frames: ${r.usableFrames}.\nTimeline cues are generated from measured 2D joint-angle and torso-orientation changes.${objectLine}\n\nNo video or frame images were uploaded. First-time model loading requires an internet connection. This local model does NOT reliably identify the sport, ball/stick contact, passes, goals, mistakes or tactics. Treat timestamps as review prompts, not AI-verified events.`;
+ }catch(e){out.textContent='Local timeline could not be generated: '+(e.message||e)+'\nTry a short, clear video in a modern browser. No API key is required.';}
+ finally{btn.disabled=false;btn.textContent='Run local movement timeline ↗';}
+}
+async function sendVideoChat(q){
+ const question=(q||$('videoChatInput').value).trim();if(!question)return;
+ addVideoChatMessage(question,'user');$('videoChatInput').value='';
+ const status=$('videoChatStatus');status.textContent='Status: preparing on-device feedback…';
+ // The video is not uploaded. Feedback uses only the in-browser pose report and built-in sport guidance.
+ try{
+   const answer=videoCoachReply(question);
+   addVideoChatMessage(answer,'bot');
+   status.textContent=latestPoseReport?'Status: no-key coach used your local pose report.':'Status: no-key coach ready — run pose analysis for video-specific measurements.';
+ }catch(e){addVideoChatMessage('I could not prepare feedback. Try asking a shorter question.','bot');status.textContent='Status: local coach ready.';}
+}
+$('videoChatForm').addEventListener('submit',e=>{e.preventDefault();sendVideoChat()});
+function checkCloudStatus(){
+ $('videoChatStatus').textContent='Status: local, no-key coaching mode ready. Video and pose measurements stay in this browser.';
+}
+checkCloudStatus();
 
-html {
-  scroll-behavior: smooth;
+const videoSkillMap={
+ Hockey:['General movement','Dribbling posture','Receiving a pass','Passing technique','Shooting action','Defensive footwork','Running / acceleration'],
+ Cricket:['General movement','Batting stance and swing','Bowling action','Fielding and throwing','Wicketkeeping stance','Running between wickets'],
+ Football:['General movement','Dribbling movement','Passing technique','Shooting action','Defensive stance','Sprinting / acceleration','Change of direction'],
+ Badminton:['General movement','Ready stance','Overhead stroke','Forehand / backhand stroke','Lunge and recovery','Court footwork','Jump smash movement'],
+ Athletics:['General movement','Sprint mechanics','Running stride','Long jump / take-off','High jump approach','Throwing movement','Hurdle movement'],
+ Esports:['Gameplay clip (use Gameplay Video Review)']
+};
+function updateVideoSkills(){
+ const sport=$('videoSport').value,sel=$('videoSkill');
+ sel.replaceChildren(...(videoSkillMap[sport]||videoSkillMap.Hockey).map(x=>{const opt=document.createElement('option');opt.textContent=x;return opt;}));
+ if(sport==='Esports'){$('videoOut').textContent='For esports, use the separate Gameplay Video Review panel: it compares gameplay frames and finds high-change timestamps. Pose analysis measures people, not in-game skill.';}
 }
+function sportSpecificReview(sport,skill,r){
+ // Deliberately report only measurements actually produced by the local pose model.
+ // Do not infer sport, skill, events, errors, or tactics from body pose alone.
+ const f=n=>Number.isFinite(n)?n.toFixed(1):'not measurable';
+ const avgK=Number.isFinite(r.leftKnee)&&Number.isFinite(r.rightKnee)?(r.leftKnee+r.rightKnee)/2:NaN;
+ const avgE=Number.isFinite(r.leftElbow)&&Number.isFinite(r.rightElbow)?(r.leftElbow+r.rightElbow)/2:NaN;
+ const motion=r.averageLandmarkMotion;
+ const phaseSamples=(r.samples||[]).filter((x,i,a)=>i>0&&i<a.length-1).map((x,i,a)=>({time:x.time,change:Math.abs(x.lean-(a[i-1]?.lean??x.lean))+Math.abs(x.lk-(a[i-1]?.lk??x.lk))*.25+Math.abs(x.rk-(a[i-1]?.rk??x.rk))*.25})).filter(x=>Number.isFinite(x.change)).sort((a,b)=>b.change-a.change).slice(0,4).sort((a,b)=>a.time-b.time);
+ const phaseText=phaseSamples.length?phaseSamples.map(x=>`• ${formatTimecode(x.time)} — measured body-position change; replay this moment manually.`).join('\n'):'No clear body-position change timestamps could be estimated.';
+ const feedback=[];
+ if(Number.isFinite(avgK))feedback.push(`Average measured knee angle: ${f(avgK)}°. This is a measurement, not a good/bad technique score.`);
+ if(Number.isFinite(avgE))feedback.push(`Average measured elbow angle: ${f(avgE)}°. This is a measurement, not a good/bad technique score.`);
+ if(Number.isFinite(r.leanVariation))feedback.push(`Measured torso-orientation variation: ${f(r.leanVariation)}°. Camera angle and body visibility can affect this estimate.`);
+ if(Number.isFinite(motion))feedback.push(`Average landmark movement between sampled frames: ${f(motion)}% of frame. This is not speed.`);
+ return `<b>LOCAL BODY-MEASUREMENT REPORT — NOT VIDEO CONTENT RECOGNITION</b>\n\n<b>What was actually measured</b>\n${feedback.map(x=>'• '+x).join('\n')}\n\n<b>Timeline review prompts</b>\n${phaseText}\n\n<b>What this system cannot verify</b>\nIt has NOT identified whether this is ${safeText(sport)}, whether the selected skill (“${safeText(skill)}”) is happening, or whether the movement is correct. It cannot infer passes, shots, goals, ball/stick/racket contact, tactics, or mistakes from these measurements alone. A person in an unrelated video can also produce body-pose measurements.\n\n<b>Next step</b>\nUse the timestamps to replay the video yourself. For actual sport-specific feedback, a coach or a trained video-understanding model must verify what action is occurring. No video or frames were uploaded. ${safeText(r.disclaimer||'')} `;
+}
+async function reviewVideo(){
+ const file=$('videoFile').files[0],v=$('preview'),out=$('videoOut'),sport=$('videoSport').value,skill=$('videoSkill').value;
+ if(!file){out.textContent='Please choose a sports video first.';return}
+ if(sport==='Esports'){out.textContent='For esports clips, use the Gameplay Video Review panel. Pose analysis is for people visible in sports footage.';return}
+ if(!$('confirmSportClip').checked){out.textContent='Before analysis, tick the confirmation box only if this clip actually shows the selected sport and skill. Important: this is a user confirmation, not automatic video recognition. If this is an unrelated video, do not continue—the current model cannot tell what the video is about.';return}
+ const runBtn=$('runPoseBtn');if(runBtn?.disabled)return;if(runBtn){runBtn.disabled=true;runBtn.textContent='Analysing clip…';runBtn.setAttribute('aria-busy','true')}
+ out.textContent='Loading on-device pose model… First run needs an internet connection to load MediaPipe and its model.';
+ try{
+  const result=await window.athlonixPoseAnalysis(v,p=>{out.textContent=`POSE ANALYSIS RUNNING · ${p}%\nSampling video frames and estimating body landmarks…`});
+  // Reject weak detections rather than presenting noisy estimates as meaningful analysis.
+  const minDetected=Math.max(4,Math.ceil(result.frames*.35));
+  if(result.detected<minDetected || result.usableFrames<Math.max(4,Math.ceil(result.frames*.25)) || !Number.isFinite(result.leftKnee) && !Number.isFinite(result.leftElbow)){
+    latestPoseReport=null;
+    drawPoseTrend([]);
+    out.innerHTML='<b>ANALYSIS NOT RELIABLE — NO COACHING CONCLUSION</b>\nATHLONIX could not detect a person clearly enough across the clip. It will not generate technique advice from this result.\n\nTry a short clip with one athlete, full body visible, bright lighting, little obstruction and a steady camera. If the clip is not sports movement, this pose tool is not suitable.';
+    $('videoChatStatus').textContent='Status: analysis rejected because pose evidence was insufficient.';
+    return;
+  }
+  latestPoseReport={...result,sport,skill};
+  $('coachSport').value=sport;
+  $('videoChatStatus').textContent=`Status: ${sport} · ${skill} pose report ready — ask about these measurements.`;
+  addVideoChatMessage(`Pose analysis finished for ${sport} — ${skill}. I have local body-pose measurements and skill-specific review prompts. Ask “Explain my results” or request drills.`, 'bot');
+  const f=n=>Number.isFinite(n)?n.toFixed(1):'not measurable';
+  const base=`<b>LOCAL BODY-MEASUREMENT REPORT — NOT VIDEO CONTENT RECOGNITION</b>\nUser-selected sport: ${safeText(sport)} · user-selected skill: ${safeText(skill)} (not recognised by the model)\nFrames sampled: ${result.frames}\nFrames with a detected person: ${result.detected}\nFrames with usable landmarks: ${result.usableFrames}\nAverage landmark visibility: ${f(result.visibility)}%\n\n<b>Measured joint angles (average)</b>\nLeft knee: ${f(result.leftKnee)}° · range across clip: ${f(result.kneeRangeLeft)}°\nRight knee: ${f(result.rightKnee)}° · range across clip: ${f(result.kneeRangeRight)}°\nLeft elbow: ${f(result.leftElbow)}° · range across clip: ${f(result.elbowRangeLeft)}°\nRight elbow: ${f(result.rightElbow)}° · range across clip: ${f(result.elbowRangeRight)}°\nTorso orientation range: ${f(result.leanVariation)}°\nAverage frame-to-frame body-landmark movement: ${f(result.averageLandmarkMotion)}% of normalized frame per sample\n\n<b>Detection quality</b>\n${result.detected<Math.max(2,result.frames*.35)?'Person detection was inconsistent. Do not rely on these averages; improve lighting and keep the full body visible.':'The model detected a person in sampled frames. Use the measurements as a visual trace, not a technique grade.'}\n${result.notes.map(safeText).join('\n')}\n\n`;
+  const objectText=result.objectDetectorAvailable
+   ? (result.objectSummary.length
+      ? `<b>Visible-object detections (experimental)</b>\n${result.objectSummary.map(o=>`• ${safeText(o.label)} detected in ${o.frames} sampled frame(s) (${(o.ratio*100).toFixed(0)}% of sampled frames).`).join('\n')}\nThese are separate frame detections, not reliable continuous tracking or proof of ball/stick/racket contact. Small, fast, occluded or unusually shaped sports equipment may be missed.\n\n`
+      : '<b>Visible-object detections</b>\nThe optional object detector did not confidently identify supported objects in this clip. This does not mean no ball or equipment was present.\n\n')
+   : '<b>Visible-object detection</b>\nThe optional object model could not load, so this report contains body-pose measurements only.\n\n';
+  out.innerHTML=base+objectText+sportSpecificReview(sport,skill,result);
+  drawPoseTrend(result.samples);
+ }catch(e){out.textContent='Analysis could not start: '+(e.message||e)+'\nTry a shorter MP4/WebM clip and make sure the device is online so the model can load.'}
+ finally{if(runBtn){runBtn.disabled=false;runBtn.textContent='Run pose analysis ↗';runBtn.removeAttribute('aria-busy')}}
+}
+updateVideoSkills();
 
-body {
-  background: var(--bg);
-  color: var(--white);
-  font-family: Inter, Arial, sans-serif;
-  background-image:
-    radial-gradient(ellipse at 10% 0%, #37e6ff17, transparent 38%),
-    radial-gradient(ellipse at 90% 15%, #a66bff18, transparent 34%),
-    linear-gradient(#37e6ff08 1px, transparent 1px),
-    linear-gradient(90deg, #37e6ff08 1px, transparent 1px);
-  background-size: auto, auto, 38px 38px, 38px 38px;
+function drawPoseTrend(samples){
+ const canvas=$('poseTrendChart');if(!canvas)return;const ctx=canvas.getContext('2d');if(!ctx)return;
+ const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.fillStyle='#071018';ctx.fillRect(0,0,w,h);
+ const pad={l:48,r:16,t:18,b:32},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b;
+ const vals=samples.flatMap(s=>[s.lk,s.rk,s.le,s.re]).filter(Number.isFinite);if(!vals.length){ctx.fillStyle='#dce8eb';ctx.fillText('No measurable joint angles',pad.l,110);return}
+ const lo=Math.max(0,Math.floor((Math.min(...vals)-10)/10)*10),hi=Math.min(180,Math.ceil((Math.max(...vals)+10)/10)*10)||180,span=Math.max(20,hi-lo);
+ ctx.strokeStyle='#263944';ctx.lineWidth=1;ctx.fillStyle='#9caeb6';ctx.font='12px sans-serif';
+ for(let i=0;i<=4;i++){const y=pad.t+ph*i/4;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke();ctx.fillText(String(Math.round(hi-span*i/4))+'°',5,y+4)}
+ const series=[['lk','Left knee'],['rk','Right knee'],['le','Left elbow'],['re','Right elbow']];
+ // Use default browser palette to keep contrast consistent with user theme.
+ const colors=['#62d7ff','#ff9d62','#b8ff66','#d1a8ff'];
+ series.forEach(([key,label],j)=>{ctx.strokeStyle=colors[j];ctx.lineWidth=2;ctx.beginPath();let started=false;samples.forEach((s,i)=>{const v=s[key];if(!Number.isFinite(v)){started=false;return}const x=pad.l+(samples.length<=1?0:i*pw/(samples.length-1)),y=pad.t+(hi-v)*ph/span;if(!started){ctx.moveTo(x,y);started=true}else ctx.lineTo(x,y)});ctx.stroke()});
+ ctx.fillStyle='#dce8eb';ctx.fillText('Start',pad.l,h-9);ctx.fillText('Time →',w/2-20,h-9);ctx.fillText('End',w-pad.r-24,h-9);
+ let x=pad.l;series.forEach(([key,label],i)=>{ctx.fillStyle=colors[i];ctx.fillRect(x,5,10,10);ctx.fillStyle='#dce8eb';ctx.fillText(label,x+14,14);x+=i===0?112: i===1?122: i===2?124:0});
 }
+function makeSchedule(){let s=$('schedSport').value,d=+$('days').value,t=$('time').value,l=$('level').value;let days=['MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY','SUNDAY'],activities=['Skills & technique','Easy recovery / mobility','Speed, agility or footwork','Skills under light pressure','Fitness + sport-specific drills','Practice game or event work','Rest / gentle mobility'];let active=0;$('scheduleOut').innerHTML=days.map((day,i)=>{let act;if(i===6)act='Rest day, hydration and recovery';else if(active>=d)act='Rest / gentle mobility';else{act=activities[i];active++}return `<div class="day"><b>${day}</b><span><strong style="color:white">${act}</strong><br>${act.startsWith('Rest')?'Let your body recover.':`${s} focus · ${t} · ${l} level. Warm up first and cool down after.`}</span></div>`}).join('')}
+let state='idle';function reaction(){let b=$('reactionBtn'),r=$('reactionResult');if(state==='waiting'){clearTimeout(window.rt);state='idle';b.textContent='Start focus drill';r.textContent='TOO SOON — RESET';return}if(state==='ready'){let ms=Math.round(performance.now()-window.started);r.textContent=ms+' MS — NICE FOCUS';$('focusScore').innerHTML=Math.max(1,Math.min(10,Math.round(1000/ms*10)))+'<em>/10</em>';state='idle';b.textContent='Try again';return}state='waiting';b.textContent='WAIT FOR SIGNAL…';r.textContent='STAY READY';window.rt=setTimeout(()=>{state='ready';window.started=performance.now();b.textContent='TAP NOW!';r.textContent='SIGNAL LIVE'},1000+Math.random()*2500)}
+const esportAdvice={"Tactical shooters":"Warm up with a short, controlled mechanics routine. Review crosshair placement, use of cover, utility timing and whether each decision helped the team. Communicate concise information; avoid blaming teammates.","MOBA":"Review lane or role decisions, map checks, objective timing and team-fight positioning. Pick one replay moment and ask: what information did I have, and what was the safer team-oriented choice?","Battle royale":"Review landing and rotation choices, cover, resource management and end-game positioning. Separate controllable decisions from random outcomes.","Sports and racing":"Practise a small set of repeatable mechanics. Review positioning, timing, route choices and consistency; change one variable at a time.","Fighting games":"Review spacing, defensive habits, punish opportunities and predictable patterns. Practise one matchup situation in short blocks and take breaks between sets.","Mobile competitive":"Use a comfortable control layout, review resource use and map awareness, and practise coordination. Keep sessions balanced with breaks and protect sleep."};
+function loadEsport(g){let key=esportAdvice[g]?g:$("esportGenre").value;$("esportGenre").value=key;$("esportTips").innerHTML=`<b>ESPORTS BRIEF // ${key.toUpperCase()}</b>\n\n${esportAdvice[key]}\n\n<b>Practice loop</b>\n• Set one small goal before the match.\n• Review one key moment afterwards.\n• Record one improvement for next time.\n• Keep play balanced with breaks, sleep and school.`}
+$("esportVideo").addEventListener("change",e=>{let f=e.target.files[0];$('esportVideoOut').textContent='New gameplay clip selected. Run analysis to create a fresh report.';if(!f)return;if(!f.type.startsWith("video/")){toast("Choose a gameplay video");e.target.value='';return}let v=$("esportPreview");if(v.dataset.url)URL.revokeObjectURL(v.dataset.url);v.dataset.url=URL.createObjectURL(f);v.src=v.dataset.url;v.style.display="block";v.load();toast("Gameplay clip ready for review")});
+async function reviewEsportVideo(){
+ const f=$('esportVideo').files[0],v=$('esportPreview'),out=$('esportVideoOut'),focus=$('esportFocus').value;
+ if(!f){out.textContent='Please choose a gameplay recording first.';return}
+ out.textContent='Analysing sampled gameplay frames locally…';
+ try{
+  const r=await window.athlonixGameplayAnalysis(v,p=>{out.textContent=`GAMEPLAY VISUAL ANALYSIS · ${p}%\nComparing sampled frames…`});
+  const hot=r.peaks.length?r.peaks.map(x=>`• ${stamp(x.time)} — visual activity ${x.score.toFixed(1)}%`).join('\n'):'No distinct high-change moments detected in sampled frames.';
+  let tips={
+   'Decision-making':'At each high-change timestamp, pause just before the event. Name the information available, your options, the choice and the result. Check whether a safer or team-oriented option existed.',
+   'Map awareness / positioning':'At each timestamp, inspect minimap/objective indicators and teammate/enemy positions if visible. Ask whether your position preserved cover, an escape route and objective awareness.',
+   'Team communication':'Use timestamps to review whether important calls were early, short and actionable. Video alone cannot verify voice communication unless audio transcription is separately added.',
+   'Aim / mechanics':'Inspect high-action timestamps frame by frame. Review crosshair placement before contact, tracking smoothness and whether you exposed yourself unnecessarily. This visual pass does not calculate true hit accuracy.',
+   'Resource management':'At the timestamps, inspect visible ammo, abilities, health, boost or other game resources. Note whether a resource was spent before a fight or objective where it could matter more.',
+   'Consistency under pressure':'Compare calm and high-change sections. Look for repeated positioning or input patterns and write down one behaviour to practise in the next session.'
+  };
+  out.innerHTML=`<b>ON-DEVICE GAMEPLAY VISUAL REPORT</b>\nClip duration: ${stamp(r.duration)}\nFrames compared: ${r.frames}\nAverage visual change: ${r.average.toFixed(2)}%\nPeak visual change: ${r.max.toFixed(2)}%\nDetected scene transitions: ${r.transitions}\n\n<b>High-change timestamps</b>\n${hot}\n\n<b>Review focus: ${focus}</b>\n${tips[focus]}\n\n<b>Practice plan</b>\n1. Open the clip at one timestamp above and review 5–10 seconds before and after.\n2. Record the situation, your choice, the outcome and one alternative.\n3. Repeat the same review for a second timestamp and look for a pattern.\n\nAccuracy note: this is real frame-change analysis, not a game-aware AI coach. It cannot reliably identify kills, shots, abilities, rotations, aim accuracy or tactical mistakes from arbitrary games. Those require a title-specific trained model or replay/telemetry integration.`;
+ }catch(e){out.textContent='Could not analyse this video: '+(e.message||e)+'\nTry a shorter MP4/WebM clip.'}
+}
+function stamp(t){let m=Math.floor(t/60),s=Math.floor(t%60);return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`}
 
-button, input, select, textarea {
-  font: inherit;
-}
+function showRules(){let s=$('ruleSport').value;$('ruleOut').innerHTML=rules[s].map(r=>`<div class="rule"><b>${r[0]}</b><span>${r[1]}</span></div>`).join('')}
+updatePositions();renderSessions();showRules();loadEsport("Tactical shooters");
+</script>
+<script type="module">
+// ATHLONIX robust local video analysis. No AI API key or video upload required.
+const waitForMetadata = video => new Promise((resolve,reject)=>{
+ if(video.readyState>=1 && Number.isFinite(video.duration) && video.duration>0) return resolve();
+ const timer=setTimeout(()=>{cleanup();reject(Error('Video metadata did not load. Try a standard MP4 or WebM clip.'));},12000);
+ const ready=()=>{if(Number.isFinite(video.duration)&&video.duration>0){cleanup();resolve();}};
+ const bad=()=>{cleanup();reject(Error('This video could not be decoded by your browser. Try MP4 (H.264) or WebM.'));};
+ const cleanup=()=>{clearTimeout(timer);video.removeEventListener('loadedmetadata',ready);video.removeEventListener('durationchange',ready);video.removeEventListener('error',bad);};
+ video.addEventListener('loadedmetadata',ready);video.addEventListener('durationchange',ready);video.addEventListener('error',bad);video.load();
+});
+const seekVideo = (video,t) => new Promise((resolve,reject)=>{
+ const target=Math.max(0,Math.min(t,Math.max(0,video.duration-.04)));
+ if(video.readyState>=2 && Math.abs(video.currentTime-target)<.015) return resolve();
+ let timer;const cleanup=()=>{clearTimeout(timer);video.removeEventListener('seeked',done);video.removeEventListener('error',bad);};
+ const done=()=>{cleanup();resolve();};const bad=()=>{cleanup();reject(Error('The browser could not read a frame from this video.'));};
+ video.addEventListener('seeked',done,{once:true});video.addEventListener('error',bad,{once:true});
+ timer=setTimeout(()=>{cleanup();reject(Error('Timed out while seeking the video. Try a shorter clip or a different video format.'));},10000);
+ try{video.currentTime=target;}catch(e){cleanup();reject(Error('This video cannot seek to the requested frame.'));}
+});
+const average = a => {const v=a.filter(Number.isFinite);return v.length?v.reduce((x,y)=>x+y,0)/v.length:NaN;};
+const angleDeg = (a,b,c,w,h) => {
+ if(!a||!b||!c) return NaN;
+ // Convert normalized landmark coordinates to pixel-like coordinates before angle calculation.
+ const v1=[(a.x-b.x)*w,(a.y-b.y)*h],v2=[(c.x-b.x)*w,(c.y-b.y)*h];
+ const n1=Math.hypot(v1[0],v1[1]),n2=Math.hypot(v2[0],v2[1]);if(n1<1e-5||n2<1e-5)return NaN;
+ const d=(v1[0]*v2[0]+v1[1]*v2[1])/(n1*n2);return Math.acos(Math.max(-1,Math.min(1,d)))*180/Math.PI;
+};
+const midpoint=(a,b)=>({x:(a.x+b.x)/2,y:(a.y+b.y)/2});
+const loadPoseModel = async () => {
+ const mp=await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14');
+ const vision=await mp.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
+ let instance=null, loadError=null;
+ for(const delegate of ['GPU','CPU']){
+  try{instance=await mp.PoseLandmarker.createFromOptions(vision,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task',delegate},runningMode:'VIDEO',numPoses:1,minPoseDetectionConfidence:.5,minPosePresenceConfidence:.5,minTrackingConfidence:.5});break;}
+  catch(e){loadError=e;}
+ }
+ if(!instance)throw Error('The pose model could not start on this device. Check your connection and try a modern browser. '+(loadError?.message||''));
+ return instance;
+};
+let poseModelPromise=null,objectModelPromise=null;
+const loadObjectDetector=async()=>{
+ const mp=await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14');
+ const vision=await mp.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
+ let detector=null,lastError=null;
+ for(const delegate of ['GPU','CPU']){
+  try{detector=await mp.ObjectDetector.createFromOptions(vision,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/object_detector/efficientdet_lite0/float32/1/efficientdet_lite0.tflite',delegate},runningMode:'VIDEO',scoreThreshold:.35,maxResults:8});break;}
+  catch(e){lastError=e;}
+ }
+ if(!detector)throw Error(lastError?.message||'Object detector unavailable');
+ return detector;
+};
+window.athlonixPoseAnalysis=async(video,progress=()=>{})=>{
+ await waitForMetadata(video);
+ if(!poseModelPromise)poseModelPromise=loadPoseModel().catch(e=>{poseModelPromise=null;throw e;});
+ const model=await poseModelPromise,duration=video.duration;
+ // Object detection is optional: if its model cannot load, body-pose analysis still works.
+ if(!objectModelPromise)objectModelPromise=loadObjectDetector().catch(()=>null);
+ const objectModel=await objectModelPromise;
+ // Use a denser sample, capped to keep local analysis responsive.
+ const count=Math.min(60,Math.max(12,Math.ceil(duration/0.5))),samples=[],objectSamples=[];let lastTimestamp=0;
+ const originalTime=video.currentTime,wasPaused=video.paused;
+ try{
+  for(let i=0;i<count;i++){
+   const t=Math.min(Math.max(.02,duration-.04),duration*(i+.5)/count);await seekVideo(video,t);
+   const timestamp=Math.max(lastTimestamp+1,Math.round(t*1000));lastTimestamp=timestamp;
+   const result=model.detectForVideo(video,timestamp),lm=result.landmarks?.[0];
+   if(objectModel){
+    try{
+     const od=objectModel.detectForVideo(video,timestamp),w=video.videoWidth||640,h=video.videoHeight||360;
+     const detections=(od.detections||[]).flatMap(d=>{
+      const cat=(d.categories||[]).slice().sort((a,b)=>(b.score||0)-(a.score||0))[0];if(!cat)return[];
+      const box=d.boundingBox||{};return [{label:cat.categoryName||cat.displayName||'object',score:cat.score||0,x:((box.originX||0)+(box.width||0)/2)/w,y:((box.originY||0)+(box.height||0)/2)/h,width:(box.width||0)/w,height:(box.height||0)/h}];
+     });
+     objectSamples.push({time:t,detections});
+    }catch(e){/* keep pose measurements even if one object frame fails */}
+   }
+   if(lm){
+    const vis=lm.map(p=>p.visibility??0),visible=vis.filter(v=>v>=.35).length;
+    const w=video.videoWidth||640,h=video.videoHeight||360;
+    const sh=midpoint(lm[11],lm[12]),hip=midpoint(lm[23],lm[24]);
+    // Lean is the angle of shoulder-midpoint to hip-midpoint relative to vertical, not shoulder-line tilt.
+    const torsoLean=Math.atan2((sh.x-hip.x)*w,(hip.y-sh.y)*h)*180/Math.PI;
+    samples.push({time:t,visibility:average(vis)*100,visibleRatio:visible/lm.length,
+     lk:angleDeg(lm[23],lm[25],lm[27],w,h),rk:angleDeg(lm[24],lm[26],lm[28],w,h),
+     le:angleDeg(lm[11],lm[13],lm[15],w,h),re:angleDeg(lm[12],lm[14],lm[16],w,h),lean:torsoLean,
+     points:lm.map(p=>({x:p.x,y:p.y,v:p.visibility??0}))});
+   }
+   progress(Math.round((i+1)/count*100));
+  }
+ } finally {
+  try{await seekVideo(video,Math.min(originalTime,Math.max(0,duration-.04)));}catch{}
+  if(!wasPaused)try{await video.play();}catch{}
+ }
+ const usable=samples.filter(x=>x.visibleRatio>=.35),use=usable.length?usable:samples;
+ if(!use.length)throw Error('No usable body landmarks were detected. Try brighter lighting, a full-body view and a supported video format.');
+ const mean=k=>average(use.map(x=>x[k]));
+ const lean=use.map(x=>x.lean).filter(Number.isFinite),leanVariation=lean.length?Math.max(...lean)-Math.min(...lean):NaN;
+ const notes=[];
+ if(use.length<Math.max(3,count*.35))notes.push('Low reliable-pose coverage. Improve lighting, keep the full body visible and reduce occlusion.');
+ if(mean('visibility')<65)notes.push('Landmark visibility is low; measurements may be unreliable.');
+ if(Number.isFinite(mean('lk'))&&Number.isFinite(mean('rk'))&&Math.abs(mean('lk')-mean('rk'))>25)notes.push('A left/right knee-angle difference appears in this camera view. Compare matching movement phases; camera perspective can create this difference.');
+ if(Number.isFinite(leanVariation)&&leanVariation>35)notes.push('Torso orientation changes substantially across sampled frames. This may be normal movement; review the timestamps before drawing conclusions.');
+ if(!notes.length)notes.push('No simple measurement warning was triggered. This does not mean technique is correct; compare matching repetitions with a coach-approved reference.');
+ const range=k=>{const a=use.map(x=>x[k]).filter(Number.isFinite);return a.length?Math.max(...a)-Math.min(...a):NaN};
+ const motion=[];for(let i=1;i<use.length;i++){const a=use[i-1].points,b=use[i].points;if(!a||!b)continue;const ids=[11,12,13,14,15,16,23,24,25,26,27,28];const ds=ids.filter(j=>a[j]?.v>=.35&&b[j]?.v>=.35).map(j=>Math.hypot((b[j].x-a[j].x),(b[j].y-a[j].y)));if(ds.length)motion.push(average(ds)*100);}
+ const timestampFindings=use.filter((x,i)=>i===0||i===use.length-1||Math.abs(x.lean-(use[i-1]?.lean??x.lean))>12).slice(0,6).map(x=>({time:x.time,lean:x.lean}));
+ const objectCounts={};for(const frame of objectSamples)for(const label of new Set(frame.detections.map(d=>d.label)))objectCounts[label]=(objectCounts[label]||0)+1;
+ const trackedLabels=Object.keys(objectCounts).sort((a,b)=>objectCounts[b]-objectCounts[a]);
+ const objectSummary=trackedLabels.slice(0,6).map(label=>({label,frames:objectCounts[label],ratio:objectSamples.length?objectCounts[label]/objectSamples.length:0}));
+ return {frames:count,detected:samples.length,usableFrames:usable.length,visibility:mean('visibility'),leftKnee:mean('lk'),rightKnee:mean('rk'),leftElbow:mean('le'),rightElbow:mean('re'),leanVariation,kneeRangeLeft:range('lk'),kneeRangeRight:range('rk'),elbowRangeLeft:range('le'),elbowRangeRight:range('re'),averageLandmarkMotion:average(motion),motionSamples:motion.length,samples:use.map(x=>({time:x.time,lk:x.lk,rk:x.rk,le:x.le,re:x.re,lean:x.lean,visibility:x.visibility,visibleRatio:x.visibleRatio})),objectSamples,objectSummary,objectDetectorAvailable:!!objectModel,notes,timestampFindings,
+ disclaimer:'2D pose estimates only. Camera angle, perspective, clothing, occlusion and the movement phase affect results. Not a medical assessment or a definitive technique score.'};
+};
+window.athlonixGameplayAnalysis=async(video,progress=()=>{})=>{
+ await waitForMetadata(video);const duration=video.duration;
+ const count=Math.min(120,Math.max(16,Math.ceil(duration/0.5))),canvas=document.createElement('canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true});
+ if(!ctx)throw Error('This browser cannot create a frame-analysis canvas.');canvas.width=96;canvas.height=54;
+ const originalTime=video.currentTime,wasPaused=video.paused;let prev=null,changes=[],transitions=0;
+ try{
+  for(let i=0;i<count;i++){
+   const t=Math.min(Math.max(.02,duration-.04),duration*(i+.5)/count);await seekVideo(video,t);ctx.drawImage(video,0,0,96,54);
+   const data=ctx.getImageData(0,0,96,54).data;let diff=0,n=0;
+   if(prev){for(let p=0;p<data.length;p+=16){diff+=Math.abs(data[p]-prev[p])+Math.abs(data[p+1]-prev[p+1])+Math.abs(data[p+2]-prev[p+2]);n+=3;}
+    const score=n?diff/(n*255)*100:0;changes.push({time:t,score});if(score>22)transitions++;
+   }
+   prev=data;progress(Math.round((i+1)/count*100));
+  }
+ } finally {try{await seekVideo(video,Math.min(originalTime,Math.max(0,duration-.04)));}catch{}if(!wasPaused)try{await video.play();}catch{}}
+ const vals=changes.map(x=>x.score),avg=average(vals)||0,max=vals.length?Math.max(...vals):0;
+ // Non-maximum suppression: do not report many nearly identical timestamps.
+ const candidates=changes.slice().sort((a,b)=>b.score-a.score),peaks=[];
+ for(const x of candidates){if(peaks.every(y=>Math.abs(y.time-x.time)>=2.5))peaks.push(x);if(peaks.length>=6)break;}
+ peaks.sort((a,b)=>a.time-b.time);
+ return {duration,frames:count,average:avg,max,transitions,peaks,disclaimer:'Visual-change estimates only. Motion, camera movement, menus, flashes and scene cuts can all create peaks; this does not identify game events, hits, tactics or skill accuracy.'};
+};
+const sportThemePicker=document.getElementById('themeSport');
+if(sportThemePicker)sportThemePicker.addEventListener('change',e=>applySportTheme(e.target.value));
+['trackSport','posSport','coachSport','schedSport','ruleSport'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('change',e=>{if(e.target.value&&sportThemes[e.target.value])applySportTheme(e.target.value)});});
+try{applySportTheme(localStorage.getItem('athlonixSportTheme')||'Hockey',false)}catch(e){applySportTheme('Hockey',false)}
+</script>
+<script>
 
-button, a {
-  cursor: pointer;
-}
+/* Replace OS-native select popups with theme-aware dropdown menus on desktop and mobile. */
+(function(){
+ const all=()=>Array.from(document.querySelectorAll('select'));
+ function enhance(sel){
+  if(sel.dataset.themeDropdown==='1')return;
+  sel.dataset.themeDropdown='1';
+  const wrap=document.createElement('div');wrap.className='custom-select';
+  sel.parentNode.insertBefore(wrap,sel);wrap.appendChild(sel);sel.classList.add('custom-select-native');
+  const trigger=document.createElement('button');trigger.type='button';trigger.className='custom-select-trigger';trigger.setAttribute('aria-haspopup','listbox');trigger.setAttribute('aria-expanded','false');
+  const label=document.createElement('span');label.className='custom-select-current';trigger.appendChild(label);
+  const menu=document.createElement('div');menu.className='custom-select-menu';menu.setAttribute('role','listbox');
+  wrap.append(trigger,menu);
+  function render(){
+   label.textContent=sel.selectedOptions&&sel.selectedOptions.length?sel.selectedOptions[0].textContent: (sel.options[0]?.textContent||'Choose an option');
+   menu.replaceChildren();
+   Array.from(sel.options).forEach((opt,i)=>{const b=document.createElement('button');b.type='button';b.className='custom-select-option';b.textContent=opt.textContent;b.setAttribute('role','option');b.setAttribute('aria-selected',String(i===sel.selectedIndex));b.disabled=opt.disabled;b.addEventListener('click',()=>{if(sel.selectedIndex!==i){sel.selectedIndex=i;sel.dispatchEvent(new Event('change',{bubbles:true}));sel.dispatchEvent(new Event('input',{bubbles:true}));}render();close();trigger.focus({preventScroll:true});});menu.appendChild(b)});
+  }
+  function close(){wrap.classList.remove('open');trigger.setAttribute('aria-expanded','false')}
+  function open(){all().forEach(other=>{const w=other.closest('.custom-select');if(w&&w!==wrap){w.classList.remove('open');w.querySelector('.custom-select-trigger')?.setAttribute('aria-expanded','false')}});render();wrap.classList.add('open');trigger.setAttribute('aria-expanded','true');const current=menu.querySelector('[aria-selected="true"]');if(current)current.scrollIntoView({block:'nearest'});}
+  trigger.addEventListener('click',()=>wrap.classList.contains('open')?close():open());
+  trigger.addEventListener('keydown',e=>{if(e.key==='Escape'){close();return}if(e.key==='ArrowDown'||e.key==='Enter'||e.key===' '){e.preventDefault();open();menu.querySelector('[aria-selected="true"]')?.focus();}});
+  sel.addEventListener('change',render);
+  const observer=new MutationObserver(render);observer.observe(sel,{childList:true,subtree:true,attributes:true,attributeFilter:['selected','disabled']});
+  render();
+ }
+ function init(){all().forEach(enhance)}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+ document.addEventListener('click',e=>{if(!e.target.closest('.custom-select'))document.querySelectorAll('.custom-select.open').forEach(w=>{w.classList.remove('open');w.querySelector('.custom-select-trigger')?.setAttribute('aria-expanded','false')})});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.custom-select.open').forEach(w=>{w.classList.remove('open');w.querySelector('.custom-select-trigger')?.setAttribute('aria-expanded','false')})});
+})();
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+</script>
 
-header {
-  height: 72px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5%;
-  background: #05070cef;
-  border-bottom: 1px solid #37e6ff44;
-  backdrop-filter: blur(14px);
-}
+<script>
+// ATHLONIX 5.0 local-first tools: no API key required.
+const proStore={get(k,d=[]){try{return JSON.parse(localStorage.getItem('ath5_'+k)||JSON.stringify(d))}catch(e){return d}},set(k,v){try{localStorage.setItem('ath5_'+k,JSON.stringify(v));return true}catch(e){return false}}};
+function safeText(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderProDashboard(){const a=(typeof sessions==='function'?sessions():[]);const can=$('progressChart');if(!can)return;const ctx=can.getContext('2d'),w=can.width,h=can.height;ctx.clearRect(0,0,w,h);ctx.strokeStyle='#263944';ctx.lineWidth=1;for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(30,i*h/5);ctx.lineTo(w-12,i*h/5);ctx.stroke()}if(!a.length){ctx.fillStyle='#9caeb6';ctx.font='16px sans-serif';ctx.fillText('Log a session to build your chart',24,110);$('progressSummary').textContent='No saved sessions yet.'}else{let vals=a.slice(-8).map(x=>Number(x.duration)||0),max=Math.max(30,...vals);ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--green')||'#b8ff66';ctx.lineWidth=4;ctx.beginPath();vals.forEach((v,i)=>{let x=35+i*(w-60)/Math.max(1,vals.length-1),y=h-24-(v/max)*(h-55);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();ctx.fillStyle='#dce8eb';ctx.font='12px sans-serif';vals.forEach((v,i)=>{let x=35+i*(w-60)/Math.max(1,vals.length-1),y=h-24-(v/max)*(h-55);ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();ctx.fillText(v+'m',x-10,y-10)});$('progressSummary').textContent=`${a.length} saved sessions · ${a.reduce((n,x)=>n+(+x.duration||0),0)} total minutes · latest ${vals[vals.length-1]} minutes.`}}
+function addCalendarItem(){let date=$('calDate').value||new Date().toISOString().slice(0,10),items=proStore.get('calendar',[]);items.push({date,sport:$('calSport').value,plan:$('calPlan').value,duration:Math.max(5,Math.min(240,+$('calDuration').value||45)),done:false});proStore.set('calendar',items);renderCalendar();}
+function renderCalendar(){let a=proStore.get('calendar',[]).sort((x,y)=>x.date.localeCompare(y.date));$('calendarOut').innerHTML=a.length?a.map((x,i)=>`<div class="rule"><b>${safeText(x.date)} · ${safeText(x.sport)}</b><span>${safeText(x.plan)} · ${x.duration} min ${x.done?'· COMPLETED':''}<br><button class="smallbtn" onclick="toggleCalendar(${i})">${x.done?'Mark planned':'Mark complete'}</button> <button class="smallbtn" onclick="deleteCalendar(${i})">Delete</button></span></div>`).join(''):'No calendar sessions yet.'}
+function toggleCalendar(i){let a=proStore.get('calendar',[]);if(a[i])a[i].done=!a[i].done;proStore.set('calendar',a);renderCalendar()}function deleteCalendar(i){let a=proStore.get('calendar',[]);a.splice(i,1);proStore.set('calendar',a);renderCalendar()}
+function saveProfile(){let x={name:$('profileName').value.trim(),sport:$('profileSport').value,position:$('profilePosition').value.trim(),goal:$('profileGoal').value.trim()};proStore.set('profile',x);$('profileOut').textContent='Profile saved on this device: '+(x.name||'Athlete')+' · '+x.sport+' · '+(x.goal||'No goal entered')}
+function loadProfile(){let x=proStore.get('profile',{});$('profileName').value=x.name||'';$('profileSport').value=x.sport||'Hockey';$('profilePosition').value=x.position||'';$('profileGoal').value=x.goal||'';$('profileOut').textContent=x.name?`Loaded ${x.name} · ${x.sport} · ${x.position||'No position set'} · Goal: ${x.goal||'not set'}`:'No saved profile yet.'}
+function addTeamMember(){let name=$('teamName').value.trim(),role=$('teamRole').value.trim();if(!name){$('teamOut').textContent='Enter a player nickname first.';return}let a=proStore.get('team',[]);a.push({name,role});proStore.set('team',a);$('teamName').value='';$('teamRole').value='';renderTeam()}
+function renderTeam(){$('teamOut').innerHTML=proStore.get('team',[]).map((x,i)=>`<div class="rule"><b>${safeText(x.name)}</b><span>${safeText(x.role||'Role not set')} <button class="smallbtn" onclick="removeTeamMember(${i})">Remove</button></span></div>`).join('')||'No players added yet.'}function removeTeamMember(i){let a=proStore.get('team',[]);a.splice(i,1);proStore.set('team',a);renderTeam()}
+const quizBank={Hockey:[['Where must a field goal generally be played from?',['Inside the shooting circle','From anywhere on the pitch','Only from halfway'],0,'A field goal must be scored from an attacker playing the ball inside the shooting circle.'],['What should a player avoid when contesting the ball?',['Using the stick safely','Dangerous stick swings','Passing to a teammate'],1,'Players must avoid dangerous play and unsafe stick use.']],Cricket:[['How many legal balls are in a standard over?',['4','6','8'],1,'A standard over has six legal deliveries.'],['What is a batter out when the ball hits the stumps and dislodges a bail?',['Bowled','Run out','Stumped'],0,'That dismissal is bowled.']],Football:[['How many players per team are normally on the field at kick-off in standard association football?',['9','11','13'],1,'A standard team fields 11 players, including the goalkeeper.'],['What does a red card mean?',['Warning only','Player is sent off','Award a corner'],1,'A red card means the player is sent off.']],Badminton:[['A standard game is usually played to how many points?',['15','21','30'],1,'Most standard badminton games use rally scoring to 21 points, with required lead rules.'],['A rally ends when…',['A fault occurs or shuttle lands out','Players change rackets','Crowd cheers'],0,'A fault or shuttle landing out ends the rally.']],Athletics:[['In a sprint race, where should an athlete finish?',['At the finish line','At the 100 m mark always','When they feel tired'],0,'Finish according to the marked finish line for that event.'],['What is a false start?',['Starting before the permitted signal','Finishing first','Changing lanes after finish'],0,'A false start is starting before the start signal under the event rules.']],Esports:[['Which is good competitive practice?',['Use cheats','Communicate respectfully and follow rules','Harass teammates'],1,'Fair play and respectful communication support competition.'],['After a mistake, a useful review habit is…',['Identify one decision to improve','Blame the team','Never review it'],0,'Review one specific decision and choose a practical next step.']]};let currentQuiz=null,quizScore=0,quizTotal=0;function newQuiz(){let bank=quizBank[$('quizSport').value]||quizBank.Hockey;currentQuiz=bank[Math.floor(Math.random()*bank.length)];$('quizQuestion').textContent=currentQuiz[0];$('quizResult').textContent='';$('quizAnswers').innerHTML=currentQuiz[1].map((x,i)=>`<button class="btn alt" onclick="answerQuiz(${i})">${safeText(x)}</button>`).join('')}
+function answerQuiz(i){if(!currentQuiz)return;quizTotal++;let ok=i===currentQuiz[2];if(ok)quizScore++;$('quizResult').textContent=(ok?'Correct! ':'Not quite. ')+currentQuiz[3]+` Score: ${quizScore}/${quizTotal}`;$('quizAnswers').innerHTML='';currentQuiz=null}
+function saveWellness(){let a=proStore.get('wellness',[]),x={date:new Date().toLocaleDateString(),sleep:Math.max(0,Math.min(24,+$('wellSleep').value||0)),energy:+$('wellEnergy').value,water:Math.max(0,+$('wellWater').value||0),note:$('wellNote').value.trim()};a.push(x);proStore.set('wellness',a);let tip=x.sleep<7?'Consider a calm earlier bedtime if possible.':x.energy<=2?'Keep activity gentle if you feel unusually tired.':'Check in with how you feel and keep recovery balanced.';$('wellOut').textContent=`Saved check-in: ${x.sleep} h sleep · energy ${x.energy}/5 · ${x.water} water breaks. ${tip} This diary is not medical advice.`;renderProDashboard()}
 
-.brand {
-  font: 900 20px Orbitron, sans-serif;
-  letter-spacing: 2px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+function setReminder(){let val=$('reminderTime').value,txt=$('reminderText').value.trim()||'Time for your planned practice',when=new Date(val).getTime();if(!val||when<=Date.now()){$('reminderOut').textContent='Choose a future date and time.';return}let delay=when-Date.now();if(delay>2147480000){$('reminderOut').textContent='Choose a reminder within about 24 days while this page stays open.';return}if('Notification'in window&&Notification.permission==='default')Notification.requestPermission();setTimeout(()=>{if('Notification'in window&&Notification.permission==='granted')new Notification('ATHLONIX reminder',{body:txt});else alert('ATHLONIX reminder: '+txt)},delay);$('reminderOut').textContent='Reminder set for '+new Date(when).toLocaleString()+'. Keep this page open; browser may pause reminders when closed.'}
+// Pro Athlete Tools section removed; no initialization required.
+</script>
 
-.brand b {
-  color: var(--cyan);
-}
 
-.logo {
-  border: 2px solid var(--cyan);
-  color: var(--cyan);
-  width: 36px;
-  height: 36px;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 0 20px #37e6ff40;
-}
 
-.status {
-  font: 700 10px Orbitron, sans-serif;
-  color: var(--green);
-  letter-spacing: 1px;
-  border: 1px solid #69ffb455;
-  padding: 10px;
-}
 
-.menu {
-  display: none;
-  background: #111c2c;
-  color: white;
-  border: 1px solid var(--line);
-  font-size: 20px;
-  padding: 8px 12px;
+<script>
+// Multi-sport Team & Court Designer. Positions are schematic planning aids.
+const formationConfigs={
+ Hockey:{count:11,roles:['GK','D1','D2','D3','M1','M2','M3','F1','F2','F3','F4'],names:['Goalkeeper','Defender 1','Defender 2','Defender 3','Midfielder 1','Midfielder 2','Midfielder 3','Forward 1','Forward 2','Forward 3','Forward 4'],presets:{balanced:'Balanced (1–3–3–4)',attack:'Attacking shape',defend:'Defensive shape',press:'High press'},layouts:{balanced:[[50,92],[28,77],[50,78],[72,77],[25,56],[50,61],[75,56],[20,35],[40,31],[60,31],[80,35]],attack:[[50,92],[35,78],[65,78],[22,57],[42,59],[58,59],[78,57],[18,32],[39,29],[61,29],[82,32]],defend:[[50,92],[18,77],[39,80],[61,80],[82,77],[25,58],[50,62],[75,58],[38,39],[62,39],[50,24]],press:[[50,92],[35,79],[65,79],[25,60],[50,64],[75,60],[18,43],[39,46],[61,46],[82,43],[50,26]]}},
+ Football:{count:11,roles:['GK','LB','CB','CB','RB','DM','CM','CM','LW','ST','RW'],names:['Goalkeeper','Left back','Centre back 1','Centre back 2','Right back','Defensive mid','Central mid 1','Central mid 2','Left winger','Striker','Right winger'],presets:{balanced:'4–3–3 Balanced',attack:'4–2–4 Attacking',defend:'4–4–2 Defensive',press:'High press'},layouts:{balanced:[[50,92],[18,76],[39,80],[61,80],[82,76],[35,60],[55,61],[73,55],[18,34],[50,27],[82,34]],attack:[[50,92],[18,77],[39,80],[61,80],[82,77],[35,60],[65,60],[18,35],[38,28],[62,28],[82,35]],defend:[[50,92],[18,77],[39,80],[61,80],[82,77],[18,58],[39,58],[61,58],[82,58],[38,35],[62,35]],press:[[50,92],[18,77],[39,80],[61,80],[82,77],[25,56],[50,58],[75,56],[22,36],[50,28],[78,36]]}},
+ Cricket:{count:11,roles:['WK','BAT','NB','BOWL','F1','F2','F3','F4','F5','F6','F7'],names:['Wicketkeeper','Striker','Non-striker','Bowler','Slip 1','Slip 2','Point','Cover','Mid-off','Mid-on','Fine leg'],presets:{balanced:'Balanced field',attack:'Attacking field',defend:'Defensive field',press:'Close-in pressure'},layouts:{balanced:[[50,13],[50,53],[50,61],[50,38],[36,25],[42,21],[22,38],[30,29],[67,35],[70,49],[78,68]],attack:[[50,13],[50,53],[50,61],[50,38],[38,24],[44,21],[25,34],[31,28],[65,31],[70,44],[77,64]],defend:[[50,13],[50,53],[50,61],[50,38],[22,24],[35,18],[16,44],[29,36],[72,36],[80,48],[82,72]],press:[[50,13],[50,53],[50,61],[50,38],[43,25],[47,22],[37,35],[63,35],[55,28],[65,44],[35,44]]}},
+ Badminton:{count:4,roles:['P1','P2','O1','O2'],names:['Our player 1','Our player 2','Opponent 1','Opponent 2'],presets:{balanced:'Doubles — side by side',attack:'Doubles — front/back attack',defend:'Doubles — defensive shape',press:'Singles practice — 2 players'},layouts:{balanced:[[34,70],[66,70],[34,30],[66,30]],attack:[[50,76],[50,62],[35,28],[65,28]],defend:[[28,70],[72,70],[28,30],[72,30]],press:[[50,72],[50,28],[50,72],[50,28]]}}
+};
+let activeFormationSport='Hockey',formationRoles=[],formationNames=[],formationPositions=[],selectedHockeyPlayer=0,dragHockey=null;
+function formationMarkingHTML(sport){if(sport==='Badminton')return '<div class="mark" style="inset:8% 19%;"></div><div class="mark" style="left:50%;top:8%;bottom:8%;border-width:0 0 0 1px"></div><div class="mark" style="left:19%;right:19%;top:25%;border-width:1px 0 0"></div><div class="mark" style="left:19%;right:19%;top:75%;border-width:1px 0 0"></div><div class="mark" style="left:19%;right:19%;top:50%;border-width:1px 0 0"></div>';
+ if(sport==='Cricket')return '<div class="mark" style="inset:5%;border-radius:50%"></div><div class="mark" style="left:45%;top:36%;width:10%;height:28%;background:#b89a68;border-color:#ead5a5"></div><div class="mark" style="left:46%;top:42%;width:8%;height:1px"></div><div class="mark" style="left:46%;top:58%;width:8%;height:1px"></div>';
+ return '<div class="mark" style="inset:4% 5%"></div><div class="mark" style="left:5%;right:5%;top:50%;border-width:1px 0 0"></div><div class="mark" style="width:22%;height:22%;left:39%;top:39%;border-radius:50%"></div><div class="mark" style="left:25%;right:25%;top:4%;height:12%"></div><div class="mark" style="left:25%;right:25%;bottom:4%;height:12%"></div>';
 }
+function initFormationSport(){const sport=document.getElementById('formationSport').value;activeFormationSport=sport;const cfg=formationConfigs[sport];const preset=document.getElementById('formationPreset');preset.innerHTML=Object.entries(cfg.presets).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');formationRoles=[...cfg.roles];formationNames=[...cfg.names];formationPositions=cfg.layouts.balanced.map(p=>[...p]);selectedHockeyPlayer=0;document.getElementById('hockeyField').dataset.sport=sport;document.getElementById('formationMarkings').innerHTML=formationMarkingHTML(sport);document.getElementById('formationFocus').innerHTML=(sport==='Badminton'?['Attack / front-back','Defence / side-by-side','Court coverage','Serve and return']:sport==='Cricket'?['Balanced build-up','Attacking field','Defensive field','Close-in pressure']:['Balanced build-up','High pressing','Defensive shape','Wide attacks','Quick counter-attacks']).map(x=>`<option>${x}</option>`).join('');renderHockeyFormation();document.getElementById('formationFeedback').textContent=sport+' setup loaded. Drag players to customise positions.';}
+function renderHockeyFormation(){const root=document.getElementById('formationPlayers');if(!root)return;root.innerHTML='';const sel=document.getElementById('selectedPlayer');sel.innerHTML='';formationPositions.forEach((p,i)=>{const opt=document.createElement('option');opt.value=String(i);opt.textContent=formationRoles[i]+' — '+formationNames[i];sel.appendChild(opt);const el=document.createElement('button');el.type='button';el.className='formation-player '+(i===selectedHockeyPlayer?' selected':'')+((/F|ST|LW|RW|BAT/.test(formationRoles[i]))?' forward':(/M|CM|DM|BOWL|P[12]/.test(formationRoles[i]))?' midfielder':'');el.innerHTML='<span class="player-role"></span><span class="player-name"></span>';el.querySelector('.player-role').textContent=formationRoles[i];el.querySelector('.player-name').textContent=formationNames[i];el.title=formationNames[i]+' ('+formationRoles[i]+') — drag to move';el.setAttribute('aria-label','Select or drag '+formationNames[i]);el.style.left=p[0]+'%';el.style.top=p[1]+'%';el.addEventListener('pointerdown',e=>{selectedHockeyPlayer=i;syncHockeySelected();dragHockey={id:i,pointer:e.pointerId,el};el.setPointerCapture(e.pointerId);e.preventDefault()});el.addEventListener('pointermove',e=>{if(!dragHockey||dragHockey.id!==i||dragHockey.pointer!==e.pointerId)return;const rect=document.getElementById('hockeyField').getBoundingClientRect();formationPositions[i]=[Math.max(7,Math.min(93,(e.clientX-rect.left)/rect.width*100)),Math.max(5,Math.min(95,(e.clientY-rect.top)/rect.height*100))];el.style.left=formationPositions[i][0]+'%';el.style.top=formationPositions[i][1]+'%'});const finish=()=>{if(dragHockey&&dragHockey.id===i){dragHockey=null;document.getElementById('formationFeedback').textContent=formationNames[i]+' repositioned. Review spacing and your coach’s plan.';syncHockeySelected()}};el.addEventListener('pointerup',finish);el.addEventListener('pointercancel',finish);el.addEventListener('click',()=>{selectedHockeyPlayer=i;syncHockeySelected()});root.appendChild(el)});syncHockeySelected()}
+function syncHockeySelected(){const sel=document.getElementById('selectedPlayer');if(sel)sel.value=String(selectedHockeyPlayer);document.querySelectorAll('#formationPlayers .formation-player').forEach((el,i)=>{el.classList.toggle('selected',i===selectedHockeyPlayer);el.querySelector('.player-name').textContent=formationNames[i]||formationRoles[i];el.title=(formationNames[i]||formationRoles[i])+' ('+formationRoles[i]+') — drag to move'});const input=document.getElementById('playerNameInput');if(input&&input.value!==(formationNames[selectedHockeyPlayer]||''))input.value=formationNames[selectedHockeyPlayer]||'';if(sel)Array.from(sel.options).forEach((o,i)=>o.text=formationRoles[i]+' — '+(formationNames[i]||'Player'))}
+function applyHockeyFormation(){const key=document.getElementById('formationPreset').value;const cfg=formationConfigs[activeFormationSport];if(activeFormationSport==='Badminton'&&key==='press'){formationRoles=['P1','O1'];formationNames=['Our player','Opponent'];formationPositions=cfg.layouts[key].slice(0,2).map(p=>[...p]);}else{formationRoles=[...cfg.roles];formationNames=[...cfg.names];formationPositions=cfg.layouts[key].map(p=>[...p]);}selectedHockeyPlayer=0;renderHockeyFormation();document.getElementById('formationFeedback').textContent=document.getElementById('formationPreset').selectedOptions[0].text+' loaded for '+activeFormationSport+'. Drag markers to customise it.'}
+function resetHockeyFormation(){applyHockeyFormation();document.getElementById('formationFocus').selectedIndex=0;document.getElementById('formationFeedback').textContent='Positions reset to the selected setup.'}
+function saveHockeyFormation(){try{localStorage.setItem('athlonix_multisport_formation_v1',JSON.stringify({sport:activeFormationSport,preset:document.getElementById('formationPreset').value,focus:document.getElementById('formationFocus').value,positions:formationPositions,roles:formationRoles,names:formationNames}));document.getElementById('formationFeedback').textContent=activeFormationSport+' setup saved on this device.'}catch(e){document.getElementById('formationFeedback').textContent='Could not save in this browser; your current setup remains available until you leave the page.'}}
+document.addEventListener('DOMContentLoaded',()=>{document.getElementById('formationSport').addEventListener('change',initFormationSport);document.getElementById('formationPreset').addEventListener('change',applyHockeyFormation);document.getElementById('selectedPlayer').addEventListener('change',()=>{selectedHockeyPlayer=+document.getElementById('selectedPlayer').value;syncHockeySelected()});document.getElementById('playerNameInput').addEventListener('input',()=>{formationNames[selectedHockeyPlayer]=document.getElementById('playerNameInput').value.slice(0,22)||formationRoles[selectedHockeyPlayer];const marker=document.querySelectorAll('#formationPlayers .formation-player')[selectedHockeyPlayer];if(marker){marker.querySelector('.player-name').textContent=formationNames[selectedHockeyPlayer];marker.title=formationNames[selectedHockeyPlayer]+' ('+formationRoles[selectedHockeyPlayer]+') — drag to move'}syncHockeySelected()});initFormationSport();try{const d=JSON.parse(localStorage.getItem('athlonix_multisport_formation_v1')||'null');if(d&&formationConfigs[d.sport]){document.getElementById('formationSport').value=d.sport;initFormationSport();if(d.positions?.length===formationConfigs[d.sport].count&&Array.isArray(d.names)){formationPositions=d.positions;formationNames=d.names;document.getElementById('formationPreset').value=d.preset||'balanced';document.getElementById('formationFocus').value=d.focus||document.getElementById('formationFocus').options[0].value;renderHockeyFormation()}}}catch(e){}}
+);
+</script>
+<script>
+// Tactical Time Machine: user-selected replay moment plus transparent, rule-based alternatives.
+let tmObjectUrl=null;
+document.addEventListener('DOMContentLoaded',()=>{const input=document.getElementById('tmVideo');if(input)input.addEventListener('change',()=>{const file=input.files&&input.files[0],video=document.getElementById('tmPreview');if(!file)return;if(tmObjectUrl)URL.revokeObjectURL(tmObjectUrl);tmObjectUrl=URL.createObjectURL(file);video.src=tmObjectUrl;video.style.display='block';video.load();video.onloadedmetadata=()=>{const ts=document.getElementById('tmTimestamp');ts.max=Math.floor(video.duration||0);};});const v=document.getElementById('tmPreview');if(v)v.addEventListener('timeupdate',()=>{if(!v.seeking&&document.activeElement!==document.getElementById('tmTimestamp'))document.getElementById('tmTimestamp').value=Math.floor(v.currentTime||0);});try{const old=JSON.parse(localStorage.getItem('athlonix_tactical_moments_v1')||'[]');if(old.length)document.getElementById('tmSaved').textContent='Saved reviews on this device: '+old.length+'. Latest: '+old[old.length-1].sport+' · '+old[old.length-1].situation+'.';}catch(e){}});
+function tmJumpToMoment(){const v=document.getElementById('tmPreview'),t=Math.max(0,Number(document.getElementById('tmTimestamp').value)||0);if(!v.src){document.getElementById('tmOutput').textContent='Upload a clip first to jump to a timestamp, or generate alternatives without a video.';return;}if(Number.isFinite(v.duration))v.currentTime=Math.min(t,v.duration);v.play().catch(()=>{});}
+function buildTacticalTimeMachine(){const sport=document.getElementById('tmSport').value,key=document.getElementById('tmSituation').value,notes=document.getElementById('tmNotes').value.trim(),ctx=document.getElementById('tmScore').value.trim(),time=Math.max(0,Number(document.getElementById('tmTimestamp').value)||0);const notePattern=/\b(match|team|player|opponent|ball|stick|sideline|circle|pass|passing|press|pressure|attack|defen[cs]e|goal|score|minute|possession|turnover|counter|formation|position|left half|midfield|forward|defender|keeper|bat|batter|bowler|wicket|fielder|pitch|over|delivery|shuttle|racket|rally|smash|serve|court|sprint|race|run|jump|throw|pace|start|finish|gameplay|map|rotation|objective|round|cooldown|teammate|tactic|strategy|khel|khiladi|team mein|match mein|ball kho|pass kar|opponent|maidan|goal|score|haar|jeet|dabav|pressure|defence|attack)\b/i;if(notes.length>0 && (notes.length<8 || !notePattern.test(notes))){document.getElementById('tmOutput').textContent='I could not identify a clear sports/match detail in your note, so I will not pretend it changes the tactical advice. Please describe what actually happened using details such as sport-specific position, ball/shuttle/possession, opponent pressure, available teammates, location on the field/court, score or time. Example: “Our hockey left half lost possession near the sideline while two teammates were available.” Your selected situation alone can still generate a general example if you clear the note.';return;}if(ctx.length>0 && ctx.length<2){document.getElementById('tmOutput').textContent='Please enter a clearer match context (for example, “1–0 up, 5 minutes left”) or leave this field blank.';return;}const plans={
+Hockey:{lost:[['Press together','Nearby players close the ball carrier while teammates cover the next pass.','May win it back quickly, but a disorganised press can open space behind.'],['Recover into shape','Sprint back into connected defensive lines and protect the middle first.','Safer structure, but gives the opponent more time on the ball.'],['Block lanes','Angle the opponent away from the centre and make the next pass harder.','Can guide play wide, but needs patience and coordinated spacing.']],attack:[['Use the free teammate','Scan quickly and pass to the clearest safe option, then move to support.','Keeps the attack connected; the passing lane may close quickly.'],['Carry into space','Move forward only if the lane is clear and the ball remains controlled.','Can draw a defender, but risks a turnover if crowded.'],['Switch the point of attack','Recycle or switch play to use width and move the defence.','Can create space, but needs accurate passing and support.']]},
+Football:{lost:[['Immediate coordinated press','Nearest player pressures while others cover passing lanes.','May regain possession high; gaps can open if teammates do not join.'],['Recover compactly','Drop back together and protect central space.','Restores shape but allows the opponent to build.'],['Delay and guide wide','Stay balanced, slow the attack and guide play away from the centre.','Buys recovery time but requires patience.']],attack:[['Pass and move','Find a teammate in space and offer a new passing angle.','Maintains possession; forward progress may be slower.'],['Carry into open space','Dribble into a clear lane to draw a defender.','Can create overloads but may expose the ball to a tackle.'],['Switch sides','Recycle and move the ball across the pitch if the lane is safe.','Can stretch the defence but requires accurate execution.']]},
+Cricket:{lost:[['Reset the plan','Communicate clearly, reset field/batting roles and focus on the next ball.','Helps avoid a rushed follow-up; does not undo the previous event.'],['Target a clear area','Bowler and captain agree on one legal target based on batter and conditions.','Improves clarity but batter and conditions may change the outcome.'],['Protect high-risk zones','Review field coverage and backing-up responsibilities with the captain.','May reduce easy scoring chances; field settings depend on format and rules.']],attack:[['Choose a controlled scoring option','Assess line, length, field and risk before attempting a scoring shot.','Can build pressure steadily; scoring opportunity depends on the delivery.'],['Rotate strike safely','Use clear calls and run only when both batters agree.','Keeps the innings moving but miscommunication risks a run-out.'],['Target a gap','Identify an open field area and select a shot you can execute reliably.','May find a boundary or single; avoid forcing a low-percentage shot.']]},
+Badminton:{lost:[['Recover to base','Regain a balanced ready position and prepare for the next shot.','Improves court coverage but cannot recover a shuttle already lost.'],['Play a high, safe reset','If under pressure and appropriate, use a controlled lift or clear.','Creates recovery time but may give the opponent an attacking chance.'],['Change placement','Move the opponent with a controlled shot rather than hitting harder by default.','Can open space but placement accuracy matters.']],attack:[['Move the opponent','Use controlled placement to create space before attacking.','Builds a better opening but may take more shots.'],['Attack only when balanced','Choose a downward or faster shot when the shuttle and body position allow.','Can pressure the opponent but increases error risk if rushed.'],['Use a deceptive change','Vary placement or pace within your reliable skill range.','May disrupt anticipation but needs practice and control.']]},
+Athletics:{lost:[['Return to the event cue','Refocus on one coach-approved technique or pacing cue.','Supports consistency; avoid making several technical changes mid-event.'],['Manage effort','Follow the planned pacing or phase target rather than reacting impulsively.','Can help control effort, but the correct plan depends on the event.'],['Review after the effort','Record timing, splits or a specific observation and discuss it with your coach.','Provides useful evidence for the next session; avoid unsafe extra maximal efforts.']]},
+Esports:{lost:[['Reset and communicate','Share the key information, regroup and avoid blame.','Improves team clarity but depends on game state and teammates.'],['Reassess objective and resources','Check available information, cooldowns/resources and map/objective priorities.','Can avoid a second mistake but information may be incomplete.'],['Play for trade/support','Move with a teammate and avoid isolated actions when the team is regrouping.','Improves coordination but may concede space or time.']],attack:[['Coordinate the objective','Align roles and timing around a clear team objective.','Creates a shared plan but requires reliable communication.'],['Gather information first','Use safe information-gathering options before committing.','Reduces uncertainty but can cost time or resources.'],['Create a distraction then rotate','Use a coordinated feint only when the team understands the plan.','May pull defenders away but can fail if the opponent reads it.']]}};
+const generic={lost:[['Regain control','Prioritise the safest immediate response and communicate clearly.','May stabilise the situation, but the best choice depends on the exact rules and context.'],['Reset structure','Return to agreed roles and protect the most important space or objective.','More organised, but may concede initiative.'],['Use a controlled alternative','Look for a safe option that avoids repeating the same risk.','Can change the pattern but requires good execution.']],attack:[['Take the clear option','Choose the option with the clearest support and manageable risk.','Reliable when available, but may be less ambitious.'],['Create space','Move or redirect play to open another option.','Can open opportunities but may take longer.'],['Keep possession/control','Reset rather than force a low-percentage action.','Reduces immediate risk but may slow progress.']]};let arr=(plans[sport]&&plans[sport][key])||(key==='attack'?generic.attack:generic.lost);if(key==='pressure')arr=[['Find the safe outlet','Scan early and choose a clear support option.','Keeps control but may not progress immediately.'],['Move away from pressure','Use space away from the crowd when safe.','Can escape pressure but requires awareness.'],['Reset and reorganise','Recycle play and rebuild the next action with teammates.','Reduces risk but gives up some initiative.']];if(key==='defend'||key==='counter')arr=[['Protect the most dangerous space','Recover into a balanced shape and communicate assignments.','Reduces immediate danger but may concede territory.'],['Delay the opponent','Stay controlled and make the opponent take an extra action.','Allows teammates to recover but requires discipline.'],['Counter when supported','Move forward only if a safe outlet and cover are available.','Can create an opportunity but risks another turnover.']];if(key==='final')arr=[['Simplify the next action','Use clear communication and the most reliable available option.','Reduces rushed errors but may limit risk-taking.'],['Keep roles clear','Confirm who presses, covers or supports before the next phase.','Improves coordination but relies on everyone understanding.'],['Adapt to score and time','Choose risk level based on the actual objective and remaining time.','Context-aware but requires accurate match information.']];if(key==='restart')arr=[['Use the rehearsed option','Follow a simple set play agreed with the team or coach.','Clear responsibilities, but opponents may anticipate it.'],['Use a safe reset','Restart with control and build the next phase.','Lower immediate risk but less direct.'],['Exploit an open space','Use a clear opening if it fits the rules and team plan.','Can create an advantage but depends on timing.']];let noteAnalysis='';
+if(notes){
+ const n=notes.toLowerCase(), insights=[];
+ if(/sideline|touchline|wide|edge|boundary|side line|किनारे|बाहर/.test(n)) insights.push('You mentioned a sideline/edge: first protect possession and check for a safe backward or inside support option. Do not force a pass along the line if the lane is closed.');
+ if(/teammate|team mate|player available|open player|free player|support|saathi|साथी|खाली खिलाड़ी/.test(n)) insights.push('You mentioned a teammate/support option: check whether the passing lane is actually clear and whether that teammate can receive safely before choosing the pass.');
+ if(/press|pressure|crowd|surrounded|double.team|dabav|दबाव/.test(n)) insights.push('You mentioned pressure: scan early, use a safe outlet or reset if the forward option is crowded, and only press as a team when cover is available.');
+ if(/lost possession|lost the ball|turnover|ball kho|ball lost|possession kho|गेंद खो/.test(n)) insights.push('You mentioned lost possession: the nearest player can delay or pressure only if teammates cover; everyone else should recover into the agreed shape.');
+ if(/counter.attack|counterattack|breakaway|fast attack|counter/.test(n)) insights.push('You mentioned a counter-attack: prioritise recovery runs and protect the most dangerous central route before attempting to win the ball back.');
+ if(/leading|ahead|winning|up by|protect.*lead|आगे/.test(n)) insights.push('You mentioned being ahead: avoid unnecessary risks, keep roles connected and choose safe possession without becoming completely passive.');
+ if(/trailing|behind|losing|need.*goal|chasing|पीछे/.test(n)) insights.push('You mentioned chasing the game: increase initiative in controlled steps and keep cover behind the attack rather than sending everyone forward.');
+ noteAnalysis=insights.length?'\n\nDETAILS RECOGNISED FROM YOUR NOTE\n'+insights.map((x,i)=>(i+1)+'. '+x).join('\n'):'\n\nDETAILS CHECK\nYour note is sports-related, but the prototype did not recognise a specific tactical cue in it. The options below still come mainly from the selected sport and situation; add clear details such as where the play happened, who was available and what the opponent did to get more relevant guidance.';
+}
+const out=`TACTICAL TIME MACHINE // ${sport.toUpperCase()}
+Review moment: ${time}s${ctx?'\nMatch context: '+ctx:''}
+Situation: ${document.getElementById('tmSituation').selectedOptions[0].text}
 
-.shell {
-  display: flex;
-  min-height: calc(100vh - 72px);
-}
+OPTION A — ${arr[0][0]}
+${arr[0][1]}
+Trade-off: ${arr[0][2]}
 
-aside {
-  width: 235px;
-  flex-shrink: 0;
-  background: #070b13ef;
-  border-right: 1px solid var(--line);
-  padding: 22px 13px;
-  position: sticky;
-  top: 72px;
-  height: calc(100vh - 72px);
-}
+OPTION B — ${arr[1][0]}
+${arr[1][1]}
+Trade-off: ${arr[1][2]}
 
-.navtitle {
-  font: 700 9px Orbitron, sans-serif;
-  letter-spacing: 2px;
-  color: #71849f;
-  padding: 15px 12px 8px;
-}
+OPTION C — ${arr[2][0]}
+${arr[2][1]}
+Trade-off: ${arr[2][2]}
 
-.nav {
-  display: block;
-  color: #aabbd0;
-  padding: 13px 12px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 700;
-  margin: 4px 0;
-}
+REVIEW QUESTIONS
+• What information was visible at this moment?
+• Which option best matched your team’s skills and match context?
+• What would you try next time, and what evidence would show it helped?${noteAnalysis}
 
-.nav:hover,
-.nav.active {
-  color: white;
-  border-color: #37e6ff50;
-  background: linear-gradient(90deg, #37e6ff17, transparent);
-  box-shadow: inset 3px 0 var(--cyan);
-}
-
-.asidebox {
-  border: 1px solid var(--line);
-  background: linear-gradient(140deg, #111e30, #090d16);
-  padding: 14px;
-  margin-top: 30px;
-  border-radius: 5px;
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-main {
-  max-width: 1500px;
-  width: 100%;
-  padding: 30px clamp(16px, 4vw, 52px) 60px;
-  margin: auto;
-  min-width: 0;
-}
-
-.eyebrow {
-  font: 700 10px Orbitron, sans-serif;
-  color: var(--cyan);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.eyebrow:before {
-  content: "";
-  display: inline-block;
-  width: 22px;
-  height: 2px;
-  background: var(--cyan);
-  vertical-align: middle;
-  margin-right: 8px;
-  box-shadow: 0 0 10px var(--cyan);
-}
-
-.hero {
-  min-height: 370px;
-  padding: clamp(24px, 5vw, 58px);
-  border: 1px solid #2c4963;
-  border-radius: 8px;
-  position: relative;
-  overflow: hidden;
-  background:
-    linear-gradient(90deg, #050911 0%, #07101bef 52%, #080e1a77 100%),
-    url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1600&q=85')
-    center/cover;
-}
+NOTE: These are rule-based alternatives based on the selected sport, situation and only the specific note cues listed above. They are not an automatic reading of the video or a prediction of the outcome. Review with your coach.`;document.getElementById('tmOutput').textContent=out;}
+function saveTacticalMoment(){const item={sport:document.getElementById('tmSport').value,situation:document.getElementById('tmSituation').selectedOptions[0].text,timestamp:Math.max(0,Number(document.getElementById('tmTimestamp').value)||0),context:document.getElementById('tmScore').value.trim(),notes:document.getElementById('tmNotes').value.trim(),analysis:document.getElementById('tmOutput').textContent,date:new Date().toLocaleString()};try{const arr=JSON.parse(localStorage.getItem('athlonix_tactical_moments_v1')||'[]');arr.push(item);localStorage.setItem('athlonix_tactical_moments_v1',JSON.stringify(arr.slice(-30)));document.getElementById('tmSaved').textContent='Saved locally! Total saved reviews: '+Math.min(arr.length,30)+'. Latest: '+item.sport+' at '+item.timestamp+'s.';}catch(e){document.getElementById('tmSaved').textContent='Could not save in this browser. You can still review the current result above.';}}
+</script>
+</body></html>
